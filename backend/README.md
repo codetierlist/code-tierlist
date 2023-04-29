@@ -32,6 +32,12 @@
 $ npm install
 ```
 
+Add a .env file in the root of the project with the following content:
+
+```bash
+ALLOWED_ORIGINS=<frontend url>
+```
+
 ## Running the app
 
 ```bash
