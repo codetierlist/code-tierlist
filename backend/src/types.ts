@@ -8,6 +8,7 @@ export interface User {
   username: string;
   avatar: string;
   role: UserRole;
+  mostRecentSubmission: string;
 }
 
 export interface Assignment {
@@ -31,7 +32,6 @@ export enum TestResultStatus {
 
 export interface TestResult {
   id: number;
-  submission: string;
   status: TestResultStatus;
   timestamp: Date;
 }
