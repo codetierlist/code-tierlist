@@ -1,11 +1,15 @@
 import { h } from 'preact';
 import style from './style.css';
 import { NotLoggedIn } from '../../components/NotLoggedIn/NotLoggedIn';
-
-const LoggedIn = true;
+import { userContext } from "../../contexts/UserContext";
+import { useContext } from 'preact/hooks';
 
 const Home = () => {
-	if (!LoggedIn) return <NotLoggedIn />;
+	const userInfo = useContext(userContext);
+
+	console.log(userInfo);
+
+	if (!userInfo["loggedIn"]) { return <NotLoggedIn /> }
 
 	return (
 		<div class={style.home}>
