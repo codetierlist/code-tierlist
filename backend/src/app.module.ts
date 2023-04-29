@@ -7,6 +7,7 @@ import { configuration } from './configuration';
 import { ConfigModule } from '@nestjs/config';
 import { UploadModule } from './upload/upload.module';
 import { AssignmentModule } from './assignment/assignment.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AssignmentModule } from './assignment/assignment.module';
     AnalyticsModule,
     UploadModule,
     AssignmentModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
