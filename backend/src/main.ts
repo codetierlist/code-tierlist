@@ -9,7 +9,7 @@ async function bootstrap() {
     origin: process.env.ALLOWED_ORIGINS.split(',') || '',
   });
   await app.listen(port, () => {
-    Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
+    Logger.log('Listening at http://localhost:' + port);
   });
 }
 bootstrap();
