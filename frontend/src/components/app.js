@@ -65,7 +65,7 @@ const App = () => {
 							<SubmitCode path="/submit-code/:id" />
 							<SubmitTest path="/submit-test/:id" />
 							<TestNewCode path="/test-new-code/:id" />
-							<TierList path="/tier-list/:id" />
+							<TierList path="/tierlist/:id" />
 							<Login path="/login" />
 						</Router>
 					</main>

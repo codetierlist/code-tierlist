@@ -1,23 +1,98 @@
-import { Box, Button, Card, CardContent, Typography } from "@mui/material";
+import { Box, Button, Grid, Card, CardContent, Typography } from "@mui/material";
 
 import { userContext } from "../../contexts/userContext";
 
+import { Fragment } from "preact";
+
 import { useContext } from "preact/hooks";
 
-const ProjectData = {
-    title: "Project Title",
-    description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-    numTest: 150
-}
+import style from "./style.css";
+
+const Hardcode = [
+    {
+        tier: "S",
+        people: [
+            "John Doe",
+            "Jane Doe",
+            "John Smith",
+        ]
+    },
+    {
+        tier: "A",
+        people: [
+            "John Doe",
+            "Jane Doe",
+            "John Smith",
+        ]
+    },
+    {
+        tier: "B",
+        people: [
+            "John Doe",
+            "Jane Doe",
+            "John Smith",
+        ]
+    },
+    {
+        tier: "C",
+        people: [
+            "John Doe",
+            "Jane Doe",
+            "John Smith",
+        ]
+    },
+    {
+        tier: "D",
+        people: [
+            "John Doe",
+            "Jane Doe",
+            "John Smith",
+        ]
+    },
+]
 
 const TierList = () => {
     return (
-        <Box component="section" sx={{
+        <Grid container  spacing={2} component="section" sx={{
             maxWidth: "1020px",
             margin: "auto",
+            marginTop: "0",
         }}>
-            Insert Tier List Here
-        </Box>
+            {
+                Hardcode.map((tier, index) => {return (
+                    <Fragment key={index}>
+                        <Grid item xs={3} key={index} sx={{
+                            backgroundColor: "#1e1e1e",
+                        }}>
+                            <Typography variant="h4" sx={{
+                                color: "white",
+                            }}>
+                                {tier.tier}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={9} key={index}>
+                            <Grid container spacing={2}>
+                                {
+                                    tier.people.map((person, index) => {return (
+                                        <Card sx={{
+                                            backgroundColor: "#1e1e1e",
+                                            color: "white",
+                                            maxWidth: "10em",
+                                        }} key={index}>
+                                            <CardContent>
+                                                <Typography variant="h5">
+                                                    {person}
+                                                </Typography>
+                                            </CardContent>
+                                        </Card>
+                                    )})
+                                }
+                            </Grid>
+                        </Grid>
+                    </Fragment>
+                )})
+            }
+        </Grid>
     )
 }
 
