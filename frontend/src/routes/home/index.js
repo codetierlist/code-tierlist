@@ -5,7 +5,6 @@ import { userContext } from "../../contexts/userContext";
 import { useContext } from 'preact/hooks';
 import { Grid, Box, Card, CardContent, Typography } from '@mui/material';
 import { SidebarCard } from '../../components/SidebarCard/SidebarCard';
-import { Urlify } from '../../components/Urlify/Urlify';
 
 const Home = () => {
 	const userInfo = useContext(userContext);
