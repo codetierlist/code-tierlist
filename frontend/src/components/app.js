@@ -10,6 +10,7 @@ import { useState, useEffect } from 'preact/hooks';
 // Code-splitting is automated for `routes` directory
 import Home from '../routes/home';
 import Profile from '../routes/profile';
+import Project from '../routes/project';
 
 const App = () => {
 	const [user, setUser] = useState({});
@@ -23,17 +24,20 @@ const App = () => {
 				{
 					name: "CSC148 A2",
 					numTest: 150,
-					grade: "S"
+					grade: "S",
+					description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
 				},
 				{
 					name: "CSC236 A1",
 					numTest: 51,
-					grade: "C"
+					grade: "C",
+					description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
 				},
 				{
 					name: "CSC209 A4",
 					numTest: 20,
-					grade: "B"
+					grade: "B",
+					description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
 				}
 			]
 		}
@@ -52,6 +56,7 @@ const App = () => {
 							<Home path="/" />
 							<Profile path="/profile/" user="me" />
 							<Profile path="/profile/:user" />
+							<Project path="/project/:id" />
 						</Router>
 					</main>
 				</div>

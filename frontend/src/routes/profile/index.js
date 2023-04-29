@@ -1,7 +1,5 @@
-import { h } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useContext, useEffect, useState } from 'preact/hooks';
 import { userContext } from '../../contexts/UserContext';
-import { useContext } from 'preact/hooks';
 
 // Note: `user` comes from the URL, courtesy of our router
 const Profile = ({ user }) => {
