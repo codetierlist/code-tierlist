@@ -1,25 +1,20 @@
 import { Box, useTheme } from "@mui/material";
 
-export const GradeColor = props => {
-	let color = "red";
+export const GetGradeColor = ({grade}) => {
 	const theme = useTheme();
 
-	switch (props.grade) {
-		case "S":
-			color = theme.palette.red;
-			break;
-		case "A":
-			color = theme.palette.green;
-			break;
-		case "B":
-			color = theme.palette.blue;
-			break;
-		case "C":
-			color = theme.palette.yellow;
-			break;
-		default:
-			color = theme.palette.grey;
+	switch (grade) {
+		case "S": return theme.palette.red;
+		case "A": return theme.palette.green;
+		case "B": return theme.palette.blue;
+		case "C": return theme.palette.yellow;
+		case "D": return theme.palette.yellow;
+		default: return theme.palette.red;
 	}
+}
+
+export const GradeColor = props => {
+	let color = GetGradeColor(props);
 
 	return (
 		<Box sx={{

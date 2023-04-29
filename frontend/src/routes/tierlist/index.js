@@ -6,6 +6,8 @@ import { Fragment } from "preact";
 
 import { useContext } from "preact/hooks";
 
+import { GetGradeColor } from "../../components/GradeColor/GradeColor";
+
 import style from "./style.css";
 
 const Hardcode = [
@@ -62,7 +64,7 @@ const TierList = () => {
                 Hardcode.map((tier, index) => {return (
                     <Fragment key={index}>
                         <Grid item xs={3} key={index} sx={{
-                            backgroundColor: "#1e1e1e",
+                            backgroundColor: GetGradeColor(tier.tier).main,
                         }}>
                             <Typography variant="h4" sx={{
                                 color: "white",
@@ -70,7 +72,9 @@ const TierList = () => {
                                 {tier.tier}
                             </Typography>
                         </Grid>
-                        <Grid item xs={9} key={index}>
+                        <Grid item xs={9} key={index} sx={{
+                            backgroundColor: "#1e1e1e",
+                        }}>
                             <Grid container spacing={2}>
                                 {
                                     tier.people.map((person, index) => {return (
