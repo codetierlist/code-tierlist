@@ -1,111 +1,136 @@
-import { Box, Button, Card, CardContent, Typography } from "@mui/material";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepButton from '@mui/material/StepButton';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
-import { userContext } from "../../contexts/UserContext";
+import SubmitCode from '../submitCode';
+import SubmitTest from '../submitTest';
+import TierList from '../tierList';
 
-import { useContext } from "preact/hooks";
+const steps = [
+	{
+		name: "Submit working test",
+		content: <SubmitTest noButton />
+	},
+	{
+		name: "Submit your code",
+		content: <SubmitCode noButton />
+	},
+	{
+		name: "View tier list!",
+		content: <TierList />
+	}
+];
 
-const ProjectData = {
-    title: "Project Title",
-    description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-    numTest: 150
-}
+export default function TestNewCode() {
+	const [activeStep, setActiveStep] = React.useState(0);
+	const [completed, setCompleted] = React.useState({});
 
-const TestNewCode = () => {
-    return (
-        <Box component="section" sx={{
-            maxWidth: "1020px",
-            margin: "auto",
-        }}>
-            <HeroCard
-                sidebarTitle={ProjectData.title}
-                numTest={ProjectData.numTest}
-                name={ProjectData.title}
-            />
-            <Typography sx={{ margin: "3rem 1rem 1rem 1rem" }} variant="h2">
-                Description
-            </Typography>
-            <Typography sx={{ margin: "1rem" }}>
-                {ProjectData.description}
-            </Typography>
-        </Box>
-    )
-}
+	const totalSteps = () => {
+		return steps.length;
+	};
 
-const HeroCard = props => {
-    const user = useContext(userContext);
+	const completedSteps = () => {
+		return Object.keys(completed).length;
+	};
+
+	const isLastStep = () => {
+		return activeStep === totalSteps() - 1;
+	};
+
+	const allStepsCompleted = () => {
+		return completedSteps() === totalSteps();
+	};
+
+	const handleNext = () => {
+		const newActiveStep =
+			isLastStep() && !allStepsCompleted()
+				? // It's the last step, but not all steps have been completed,
+					// find the first step that has been completed
+					steps.findIndex((step, i) => !(i in completed))
+				: activeStep + 1;
+		setActiveStep(newActiveStep);
+	};
+
+	const handleBack = () => {
+		setActiveStep((prevActiveStep) => prevActiveStep - 1);
+	};
+
+	const handleStep = (step) => () => {
+		setActiveStep(step);
+	};
+
+	const handleComplete = () => {
+		const newCompleted = completed;
+		newCompleted[activeStep] = true;
+		setCompleted(newCompleted);
+		handleNext();
+	};
+
+	const handleReset = () => {
+		setActiveStep(0);
+		setCompleted({});
+	};
 
 	return (
-		<Card sx={{
-			margin: "1em",
-			backgroundColor: "#464646",
-			border: "none",
-            width: "calc(100% - 2em)",
-		}}>
-			<CardContent>
-				<Box sx={{
-					display: "flex",
-					justifyContent: "space-between" ,
-					alignItems: "center",
-				}}>
-					<Box>
-						<Typography variant="h2" gutterBottom>{props.name}</Typography>
-						{props.numTest} tests
-					</Box>
-                    <Box>
-                        {
-                            // HACK   POTENTIAL NON WORKING CODE -- SAVE FOR INTEGRATION
-                            // TODO   POTENTIAL NON WORKING CODE -- SAVE FOR INTEGRATION
-                            // FIXME  POTENTIAL NON WORKING CODE -- SAVE FOR INTEGRATION
-                            user["myProjects"].includes(props.name) ?
-                                <ExistingProject /> : <NotExistingProject />
-                        }
-                    </Box>
-				</Box>
-			</CardContent>
-		</Card>
-	)
+		<Box sx={{ maxWidth: '90%', margin: "5em auto 0 auto" }}>
+			<Stepper nonLinear activeStep={activeStep}>
+				{steps.map((step, index) => (
+					<Step key={step} completed={completed[index]}>
+						<StepButton color="inherit" onClick={handleStep(index)}>
+							{step.name}
+						</StepButton>
+					</Step>
+				))}
+			</Stepper>
+			<div>
+				{allStepsCompleted() ? (
+					<React.Fragment>
+						<Typography sx={{ mt: 2, mb: 1 }}>
+							All steps completed - you&apos;re finished
+						</Typography>
+						<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+							<Box sx={{ flex: '1 1 auto' }} />
+							<Button onClick={handleReset}>Reset</Button>
+						</Box>
+					</React.Fragment>
+				) : (
+					<React.Fragment>
+						<Typography sx={{ mt: 2, mb: 1, py: 1 }}>
+							{steps[activeStep].content}
+						</Typography>
+						<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+							<Button
+								color="inherit"
+								disabled={activeStep === 0}
+								onClick={handleBack}
+								sx={{ mr: 1 }}
+							>
+								Back
+							</Button>
+							<Box sx={{ flex: '1 1 auto' }} />
+							<Button onClick={handleNext} sx={{ mr: 1 }}>
+								Next
+							</Button>
+							{activeStep !== steps.length &&
+								(completed[activeStep] ? (
+									<Typography variant="caption" sx={{ display: 'inline-block' }}>
+										Step {activeStep + 1} already completed
+									</Typography>
+								) : (
+									<Button onClick={handleComplete}>
+										{completedSteps() === totalSteps() - 1
+											? 'Finish'
+											: 'Complete Step'}
+									</Button>
+								))}
+						</Box>
+					</React.Fragment>
+				)}
+			</div>
+		</Box>
+	);
 }
-
-const NotExistingProject = () => (
-    <>
-        <Button
-            variant="contained"
-            sx={{
-                marginRight: "1em",
-                fontSize: "1.1em",
-                textTransform: "none"
-            }}
-            color="warning"
-        >
-            Test your code
-        </Button>
-    </>
-);
-
-const ExistingProject = () => (
-    <>
-        <Button
-            variant="contained"
-            sx={{
-                marginRight: "1em",
-                fontSize: "1.1em",
-                textTransform: "none"
-            }}
-            color="warning"
-        >
-            Test new code
-        </Button>
-        <Button
-            variant="contained"
-            sx={{
-                fontSize: "1.1em",
-                textTransform: "none"
-            }}
-            color="warning"
-        >
-            Add more tests
-        </Button>
-    </>
-);
-
-export default TestNewCode;
