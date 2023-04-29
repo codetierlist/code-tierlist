@@ -3,7 +3,7 @@ import { Assignment } from 'src/types';
 
 interface AssignmentInfo {
   name: string;
-  description: string;
+  description?: string;
   numTests: number;
 }
 
