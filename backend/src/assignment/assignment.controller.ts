@@ -1,5 +1,4 @@
-import { Controller, Get, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
-import { FilesInterceptor } from '@nestjs/platform-express';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Assignment } from 'src/types';
 
 interface AssignmentInfo {
@@ -11,15 +10,10 @@ interface AssignmentInfo {
 @Controller('assignments')
 export class AssignmentController {
   @Post('')
-  @UseInterceptors(FilesInterceptor('files'))
   async createAssignment(
-    @UploadedFiles() files: Express.Multer.File[],
+    @Body() body: Assignment,
   ): Promise<Assignment> {
-    return {
-      name: 'CSC148-A1',
-      description: 'Introduction to suffering',
-      solution: 'solution1 file but actually a string',
-    };
+    return body;
   }
 
   @Get('')
