@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 import SubmitCode from '../submitCode';
 import SubmitTest from '../submitTest';
-import TierList from '../tierList';
+import TierList from '../tierlist';
 
 const steps = [
 	{
