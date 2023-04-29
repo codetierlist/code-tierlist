@@ -10,6 +10,11 @@ interface AssignmentInfo {
 @Controller('assignments')
 export class AssignmentController {
   @Post('')
+  /**
+   * Create a new assignment.
+   * @Param body The assignment to create. (name and soltuion)
+   * @returns The created assignment.
+   */
   async createAssignment(
     @Body() body: Assignment,
   ): Promise<Assignment> {
@@ -17,6 +22,10 @@ export class AssignmentController {
   }
 
   @Get('')
+  /**
+   * Get all assignments.
+   * @returns All assignments.
+  */
   async getAssignments(): Promise<AssignmentInfo[]> {
     return [
       {

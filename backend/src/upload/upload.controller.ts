@@ -15,6 +15,11 @@ export class UploadController {
   ) {}
 
   @Post('tests/:assignmentId')
+  /**
+   * Add a test to the assignment.
+   * @Param body The test to add.
+   * @returns The created test.
+   */
   async addTest(
     @Param('assignmentId') assignmentId: string,
     @Body() body: { testInput: string },
@@ -24,6 +29,11 @@ export class UploadController {
   }
 
   @Post('code/:assignmentId')
+  /**
+   * Test the code against the solution.
+   * @Param body The code to test.
+   * @returns The results of the test for everyone
+   */
   async testCode(
     @Param('assignmentId') assignmentId: string,
     @Body() body: { submission: string },
