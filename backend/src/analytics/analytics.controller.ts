@@ -2,6 +2,12 @@ import { Controller, Get, Post, UploadedFiles, UseInterceptors } from '@nestjs/c
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { Assignment } from 'src/types';
 
+interface AssignmentInfo {
+  name: string;
+  description: string;
+  numTests: number;
+}
+
 @Controller('analytics')
 export class AnalyticsController {
   @Post('assignments')
@@ -17,12 +23,12 @@ export class AnalyticsController {
   }
 
   @Get('assignments')
-  async getAssignments(): Promise<Assignment[]> {
+  async getAssignments(): Promise<AssignmentInfo[]> {
     return [
       {
         name: 'assignment1',
         description: 'assignment1 description',
-        solution: 'solution1 file',
+        numTests: 2,
       },
     ];
   }
