@@ -10,7 +10,7 @@ const ProjectData = {
     numTest: 150
 }
 
-const Project = () => {
+const SubmitTest = () => {
     return (
         <Box component="section" sx={{
             maxWidth: "1020px",
@@ -57,8 +57,7 @@ const HeroCard = props => {
                             // TODO   POTENTIAL NON WORKING CODE -- SAVE FOR INTEGRATION
                             // FIXME  POTENTIAL NON WORKING CODE -- SAVE FOR INTEGRATION
                             user["myProjects"].includes(props.name) ?
-                                <ExistingProject name={props.name} /> :
-                                <NotExistingProject name={props.name} />
+                                <ExistingProject /> : <NotExistingProject />
                         }
                     </Box>
 				</Box>
@@ -67,7 +66,7 @@ const HeroCard = props => {
 	)
 }
 
-const NotExistingProject = props => (
+const NotExistingProject = () => (
     <>
         <Button
             variant="contained"
@@ -77,15 +76,13 @@ const NotExistingProject = props => (
                 textTransform: "none"
             }}
             color="warning"
-            component="a"
-            href={`../test-new-code/${props.name.replaceAll(" ", "-").toLowerCase()}`}
         >
             Test your code
         </Button>
     </>
 );
 
-const ExistingProject = props => (
+const ExistingProject = () => (
     <>
         <Button
             variant="contained"
@@ -95,8 +92,6 @@ const ExistingProject = props => (
                 textTransform: "none"
             }}
             color="warning"
-            component="a"
-            href={`../submit-code/${props.name.replaceAll(" ", "-").toLowerCase()}`}
         >
             Test new code
         </Button>
@@ -107,12 +102,10 @@ const ExistingProject = props => (
                 textTransform: "none"
             }}
             color="warning"
-            component="a"
-            href={`../submit-test/${props.name.replaceAll(" ", "-").toLowerCase()}`}
         >
             Add more tests
         </Button>
     </>
 );
 
-export default Project;
+export default SubmitTest;

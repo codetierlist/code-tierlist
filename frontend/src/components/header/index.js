@@ -25,7 +25,7 @@ const Header = () => {
 			<Link activeClassName={style.active} href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
 				&#9881;
 			</Link>
-			<Link activeClassName={style.active} href={`/profile/${NAME.toLowerCase()}`}>
+			<Link activeClassName={style.active} href={`/profile/${NAME.replaceAll(" ", "-").toLowerCase()}`}>
 				<InitialsAvatar name={NAME} />
 			</Link>
 		</nav>

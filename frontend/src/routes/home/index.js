@@ -5,6 +5,7 @@ import { userContext } from "../../contexts/UserContext";
 import { useContext } from 'preact/hooks';
 import { Grid, Box, Card, CardContent, Typography } from '@mui/material';
 import { SidebarCard } from '../../components/SidebarCard/SidebarCard';
+import { Urlify } from '../../components/Urlify/Urlify';
 
 const Home = () => {
 	const userInfo = useContext(userContext);
@@ -63,25 +64,29 @@ const Home = () => {
 
 const Projects = props => {
 	return (
-		<Card sx={{
-			margin: "1em",
-			width: "90%",
-			backgroundColor: "#464646",
-			border: "none"
-		}}>
-			<CardContent>
-				<Box sx={{
-					display: "flex",
-					justifyContent: "space-between",
-					alignItems: "center",
-				}}>
-					<Box>
-						<strong class={style.sidebarTitle}>{props.name}</strong> <br />
-						{props.numTest} tests
+		<a href={
+            `/project/${props.name.replaceAll(" ", "-").toLowerCase()}`
+        } class={style.noUnderline}>
+			<Card sx={{
+				margin: "1em",
+				width: "90%",
+				backgroundColor: "#464646",
+				border: "none"
+			}}>
+				<CardContent>
+					<Box sx={{
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
+					}}>
+						<Box>
+							<strong class={style.sidebarTitle}>{props.name}</strong> <br />
+							{props.numTest} tests
+						</Box>
 					</Box>
-				</Box>
-			</CardContent>
-		</Card>
+				</CardContent>
+			</Card>
+		</a>
 	)
 }
 

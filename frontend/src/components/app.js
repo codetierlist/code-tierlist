@@ -11,6 +11,11 @@ import { useState, useEffect } from 'preact/hooks';
 import Home from '../routes/home';
 import Profile from '../routes/profile';
 import Project from '../routes/project';
+import SubmitCode from '../routes/submitCode';
+import SubmitTest from '../routes/submitTest';
+import TestNewCode from '../routes/testNewCode';
+import TierList from '../routes/tierlist';
+import Login from '../routes/login';
 
 const App = () => {
 	const [user, setUser] = useState({});
@@ -57,6 +62,11 @@ const App = () => {
 							<Profile path="/profile/" user="me" />
 							<Profile path="/profile/:user" />
 							<Project path="/project/:id" />
+							<SubmitCode path="/submit-code/:id" />
+							<SubmitTest path="/submit-test/:id" />
+							<TestNewCode path="/test-new-code/:id" />
+							<TierList path="/tier-list/:id" />
+							<Login path="/login" />
 						</Router>
 					</main>
 				</div>
