@@ -1,7 +1,12 @@
 import { h } from 'preact';
 import style from './style.css';
+import { NotLoggedIn } from '../../components/NotLoggedIn/NotLoggedIn';
+
+const LoggedIn = true;
 
 const Home = () => {
+	if (!LoggedIn) return <NotLoggedIn />;
+
 	return (
 		<div class={style.home}>
 			<a href="https://preactjs.com">
