@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RunnerModule } from './runner/runner.module';
 import { AnalyticsModule } from './analytics/analytics.module';
 import { configuration } from './configuration';
 import { ConfigModule } from '@nestjs/config';
+import { UploadModule } from './upload/upload.module';
+import { AssignmentModule } from './assignment/assignment.module';
 
 @Module({
   imports: [
@@ -21,8 +22,9 @@ import { ConfigModule } from '@nestjs/config';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    RunnerModule,
     AnalyticsModule,
+    UploadModule,
+    AssignmentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

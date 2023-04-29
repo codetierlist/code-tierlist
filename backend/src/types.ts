@@ -1,5 +1,5 @@
 export enum UserRole {
-  PROFESSOR = 'professor',
+  INSTRUCTOR = 'instructor',
   STUDENT = 'student',
 }
 
@@ -31,6 +31,7 @@ export enum TestResultStatus {
 
 export interface TestResult {
   id: number;
+  submission: string;
   status: TestResultStatus;
   timestamp: Date;
 }
