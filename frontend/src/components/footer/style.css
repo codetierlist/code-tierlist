@@ -1,0 +1,16 @@
+.footer {
+	background: #222;
+	display: block;
+	margin-top: 2em;
+}
+
+.footerContent {
+	height: 100%;
+	width: 90%;
+	padding: 2em 0;
+	margin: auto;
+}
+
+.footerContent a {
+	color: #fffa;
+}

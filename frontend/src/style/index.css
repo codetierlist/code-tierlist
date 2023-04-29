@@ -4,16 +4,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	color-scheme: light dark;
-	color: #444;
-	background: #fafafa;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		color: #fff;
-		background: #1c1c1c;
-	}
+	color-scheme: dark;
+	color: #fff;
+	background: #1c1c1c;
 }
 
 body {
@@ -22,15 +15,6 @@ body {
 	min-height: 100vh;
 }
 
-#app > main {
-	padding-top: 3.5rem;
-	margin: 0 auto;
-	min-height: calc(100vh - 3.5rem);
-	max-width: 1280px;
-}
-
-@media (max-width: 639px) {
-	#app > main {
-		margin: 0 2rem;
-	}
+main {
+	min-height: 100vh;
 }

@@ -3,48 +3,91 @@ import style from './style.css';
 import { NotLoggedIn } from '../../components/NotLoggedIn/NotLoggedIn';
 import { userContext } from "../../contexts/userContext";
 import { useContext } from 'preact/hooks';
+import { Grid, Box, Card, CardContent, Typography } from '@mui/material';
+import { SidebarCard } from '../../components/SidebarCard/SidebarCard';
 
 const Home = () => {
 	const userInfo = useContext(userContext);
 
-	console.log(userInfo);
-
-	if (!userInfo["loggedIn"]) { return <NotLoggedIn /> }
+	if (userInfo && Object.keys(userInfo).length === 0) { return <NotLoggedIn /> }
 
 	return (
-		<div class={style.home}>
-			<a href="https://preactjs.com">
-				<img src="../../assets/preact-logo.svg" alt="Preact Logo" height="160" width="160" />
-			</a>
-			<h1>Get Started Building PWAs with Preact-CLI</h1>
-			<section>
-				<Resource
-					title="Learn Preact"
-					description="If you're new to Preact, try the interactive tutorial to learn important concepts"
-					link="https://preactjs.com/tutorial/"
-				/>
-				<Resource
-					title="Differences to React"
-					description="If you're coming from React, check out our docs for where Preact differs"
-					link="https://preactjs.com/guide/v10/differences-to-react"
-				/>
-				<Resource
-					title="Learn Preact-CLI"
-					description="To learn more about Preact-CLI, read through the ReadMe & Wiki"
-					link="https://github.com/preactjs/preact-cli#preact-cli--"
-				/>
-			</section>
-		</div>
+		<Grid class={style.home} container spacing={2} sx={{
+			marginTop: "0",
+		}}>
+			<Grid item xs={12} md={3} sx={{
+					height: {
+						xs: "unset",
+						md: "100vh",
+					},
+					position: "sticky",
+					top: "1em",
+					backgroundColor: "#212121",
+					zIndex: 0,
+				}}>
+					<Typography
+						variant="h2"
+						class={style.yourProjects}
+						sx={{
+							margin: "0 1rem 1rem 1rem"
+						}}
+					>Your projects</Typography>
+					{
+						userInfo["myProjects"].map((i) => {
+							return (
+								<SidebarCard name={i.name} numTest={i.numTest} grade={i.grade} key={i} />
+							)
+						})
+					}
+			</Grid>
+			<Grid item xs={12} md={9}>
+				<Typography
+					variant="h2"
+					class={style.yourProjects}
+					sx={{
+						margin: "0 1rem 1rem 1rem"
+					}}
+				>
+					All projects
+				</Typography>
+				{
+					userInfo["myProjects"].map((i) => {
+						return (
+							<Projects name={i.name} numTest={i.numTest} grade={i.grade} key={i} description={i.description} />
+						)
+					})
+				}
+			</Grid>
+		</Grid>
 	);
 };
 
-const Resource = props => {
+const Projects = props => {
 	return (
-		<a href={props.link} class={style.resource}>
-			<h2>{props.title}</h2>
-			<p>{props.description}</p>
+		<a href={
+            `/project/${props.name.replaceAll(" ", "-").toLowerCase()}`
+        } class={style.noUnderline}>
+			<Card sx={{
+				margin: "1em",
+				width: "90%",
+				backgroundColor: "#464646",
+				border: "none"
+			}}>
+				<CardContent>
+					<Box sx={{
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
+					}}>
+						<Box>
+							<strong class={style.sidebarTitle}>{props.name}</strong> <br />
+							{props.numTest} tests
+						</Box>
+					</Box>
+				</CardContent>
+			</Card>
 		</a>
-	);
-};
+	)
+}
 
 export default Home;

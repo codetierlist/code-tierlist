@@ -1,6 +1,6 @@
 {
-	"name": "frontend",
-	"short_name": "frontend",
+	"name": "Code Tierlist",
+	"short_name": "Code Tierlist",
 	"start_url": "/",
 	"display": "standalone",
 	"orientation": "portrait",
