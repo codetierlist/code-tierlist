@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { Link } from 'preact-router/match';
 import style from './style.css';
 import { InitialsAvatar } from '../InitialsAvatar/InitialsAvatar';
-import { userContext } from "../../contexts/UserContext";
+import { userContext } from "../../contexts/userContext";
 import { useContext } from 'preact/hooks';
 
 const NAME = "John";

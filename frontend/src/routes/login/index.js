@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardContent, Typography, TextField } from "@mui/material";
 
-import { userContext } from "../../contexts/UserContext";
+import { userContext } from "../../contexts/userContext";
 
 import { useContext } from "preact/hooks";
 
