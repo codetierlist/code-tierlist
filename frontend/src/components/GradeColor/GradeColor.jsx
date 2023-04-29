@@ -1,20 +1,24 @@
 import { Box, useTheme } from "@mui/material";
 
-export const GetGradeColor = ({grade}) => {
+/**
+ * Given a grade letter, return the color associated with it.
+ */
+export function GetGradeColor(grade) {
 	const theme = useTheme();
 
 	switch (grade) {
 		case "S": return theme.palette.red;
-		case "A": return theme.palette.green;
-		case "B": return theme.palette.blue;
-		case "C": return theme.palette.yellow;
-		case "D": return theme.palette.yellow;
+		case "A": return theme.palette.yellow;
+		case "B": return theme.palette.green;
+		case "C": return theme.palette.blue;
+		case "D": return { main: "#7e7dff", text: "black"};
+		case "F": return { main: "#fe80fe", text: "black"};
 		default: return theme.palette.red;
 	}
 }
 
 export const GradeColor = props => {
-	let color = GetGradeColor(props);
+	let color = GetGradeColor(props.grade);
 
 	return (
 		<Box sx={{

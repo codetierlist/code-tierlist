@@ -14,7 +14,7 @@ const SubmitTest = ({buttonName = "Submit", doOnClick = null, noButton = false})
             <Typography sx={{ margin: "1rem" }}>
                 Please enter the code that you want to run against our test cases.
             </Typography>
-            <Editor height="60vh" defaultLanguage="python" theme="vs-dark" defaultValue="// insert your test here" />
+            <Editor height="60vh" defaultLanguage="python" theme="vs-dark" defaultValue="# insert your test here" />
             { !noButton &&
                 <Box sx={{
                     display: "flex",

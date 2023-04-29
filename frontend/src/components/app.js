@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { Router } from 'preact-router';
 
 import Header from './header';
+import Footer from './footer';
 import { GoogleTheme } from "./theme/theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { userContext } from "../contexts/userContext";
@@ -9,6 +10,7 @@ import { useState, useEffect } from 'preact/hooks';
 
 // Code-splitting is automated for `routes` directory
 import Home from '../routes/home';
+import Create from '../routes/create';
 import Profile from '../routes/profile';
 import Project from '../routes/project';
 import SubmitCode from '../routes/submitCode';
@@ -22,8 +24,7 @@ const App = () => {
 
 	useEffect(() => {
 		const data = {
-			loggedIn: false,
-			role: "student", // student, professor
+			role: "professor", // student, professor
 			name: "John Doe",
 			myProjects: [
 				{
@@ -67,8 +68,10 @@ const App = () => {
 							<TestNewCode path="/test-new-code/:id" />
 							<TierList path="/tierlist/:id" />
 							<Login path="/login" />
+							<Create path="/create" />
 						</Router>
 					</main>
+					<Footer />
 				</div>
 			</userContext.Provider>
 		</ThemeProvider>

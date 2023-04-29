@@ -21,6 +21,7 @@ const Home = () => {
 						md: "100vh",
 					},
 					position: "sticky",
+					top: "1em",
 					backgroundColor: "#212121",
 					zIndex: 0,
 				}}>

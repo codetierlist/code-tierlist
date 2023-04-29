@@ -14,7 +14,7 @@ const SubmitTest = ({buttonName = "Submit Test", doOnClick = null, noButton = fa
             <Typography sx={{ margin: "1rem" }}>
                 To test your code against your classmates’ tests, you will have to submit at least one test case to our database. Please write or paste a functioning test case here for us to validate.
             </Typography>
-            <Editor height="60vh" defaultLanguage="python" theme="vs-dark" defaultValue="// insert your test here" />
+            <Editor height="60vh" defaultLanguage="python" theme="vs-dark" defaultValue="# insert your test here" />
             {!noButton &&
                 <Box sx={{
                     display: "flex",
