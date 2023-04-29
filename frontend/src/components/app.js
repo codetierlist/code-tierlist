@@ -4,7 +4,7 @@ import { Router } from 'preact-router';
 import Header from './header';
 import { GoogleTheme } from "./theme/theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { userContext } from "../contexts/UserContext";
+import { userContext } from "../contexts/userContext";
 import { useState, useEffect } from 'preact/hooks';
 
 // Code-splitting is automated for `routes` directory
