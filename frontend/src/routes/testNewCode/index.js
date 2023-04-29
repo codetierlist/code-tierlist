@@ -13,15 +13,18 @@ import TierList from '../tierList';
 const steps = [
 	{
 		name: "Submit working test",
-		content: <SubmitTest noButton />
+		content: <SubmitTest noButton />,
+		buttonText: "Validate test"
 	},
 	{
 		name: "Submit your code",
-		content: <SubmitCode noButton />
+		content: <SubmitCode noButton />,
+		buttonText: "Submit code"
 	},
 	{
 		name: "View tier list!",
-		content: <TierList />
+		content: <TierList />,
+		buttonText: "Finish"
 	}
 ];
 
@@ -76,7 +79,7 @@ export default function TestNewCode() {
 	};
 
 	return (
-		<Box sx={{ maxWidth: '90%', margin: "5em auto 0 auto" }}>
+		<Box sx={{ maxWidth: '90%', margin: "2em auto 0 auto" }}>
 			<Stepper nonLinear activeStep={activeStep}>
 				{steps.map((step, index) => (
 					<Step key={step} completed={completed[index]}>
@@ -88,7 +91,7 @@ export default function TestNewCode() {
 			</Stepper>
 			<div>
 				{allStepsCompleted() ? (
-					<React.Fragment>
+					<>
 						<Typography sx={{ mt: 2, mb: 1 }}>
 							All steps completed - you&apos;re finished
 						</Typography>
@@ -96,12 +99,10 @@ export default function TestNewCode() {
 							<Box sx={{ flex: '1 1 auto' }} />
 							<Button onClick={handleReset}>Reset</Button>
 						</Box>
-					</React.Fragment>
+					</>
 				) : (
-					<React.Fragment>
-						<Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-							{steps[activeStep].content}
-						</Typography>
+					<>
+						{steps[activeStep].content}
 						<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 							<Button
 								color="inherit"
@@ -112,23 +113,16 @@ export default function TestNewCode() {
 								Back
 							</Button>
 							<Box sx={{ flex: '1 1 auto' }} />
-							<Button onClick={handleNext} sx={{ mr: 1 }}>
-								Next
+							<Button
+								onClick={handleNext}
+								sx={{ mr: 1 }}
+								variant="contained"
+								color="success"
+							>
+								{steps[activeStep].buttonText}
 							</Button>
-							{activeStep !== steps.length &&
-								(completed[activeStep] ? (
-									<Typography variant="caption" sx={{ display: 'inline-block' }}>
-										Step {activeStep + 1} already completed
-									</Typography>
-								) : (
-									<Button onClick={handleComplete}>
-										{completedSteps() === totalSteps() - 1
-											? 'Finish'
-											: 'Complete Step'}
-									</Button>
-								))}
 						</Box>
-					</React.Fragment>
+					</>
 				)}
 			</div>
 		</Box>

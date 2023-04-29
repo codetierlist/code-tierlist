@@ -2,7 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 
 import Editor from '@monaco-editor/react';
 
-const SubmitTest = ({buttonName = "Submit", doOnClick = null}) => {
+const SubmitTest = ({buttonName = "Submit", doOnClick = null, noButton = false}) => {
     return (
         <Box component="section" sx={{
             maxWidth: "1020px",
@@ -15,13 +15,15 @@ const SubmitTest = ({buttonName = "Submit", doOnClick = null}) => {
                 Please enter the code that you want to run against our test cases.
             </Typography>
             <Editor height="60vh" defaultLanguage="python" theme="vs-dark" defaultValue="// insert your test here" />
-            <Box sx={{
-                display: "flex",
-                justifyContent: "right",
-                alignItems: "center",
-            }}>
-                <Button sx={{ margin: "1rem 0 0 0" }} variant="contained" color="success">{buttonName}</Button>
-            </Box>
+            { !noButton &&
+                <Box sx={{
+                    display: "flex",
+                    justifyContent: "right",
+                    alignItems: "center",
+                }}>
+                    <Button sx={{ margin: "1rem 0 0 0" }} variant="contained" color="success">{buttonName}</Button>
+                </Box>
+            }
         </Box>
     )
 }
