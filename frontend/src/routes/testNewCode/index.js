@@ -4,13 +4,13 @@ import { userContext } from "../../contexts/UserContext";
 
 import { useContext } from "preact/hooks";
 
-const TestNewCode = {
+const ProjectData = {
     title: "Project Title",
     description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
     numTest: 150
 }
 
-const Project = () => {
+const TestNewCode = () => {
     return (
         <Box component="section" sx={{
             maxWidth: "1020px",
