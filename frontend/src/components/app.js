@@ -16,9 +16,26 @@ const App = () => {
 
 	useEffect(() => {
 		const data = {
-			loggedIn: true,
-			role: "student", // student, instructor
+			loggedIn: false,
+			role: "student", // student, professor
 			name: "John Doe",
+			myProjects: [
+				{
+					name: "CSC148 A2",
+					numTest: 150,
+					grade: "S"
+				},
+				{
+					name: "CSC236 A1",
+					numTest: 51,
+					grade: "C"
+				},
+				{
+					name: "CSC209 A4",
+					numTest: 20,
+					grade: "B"
+				}
+			]
 		}
 
 		setUser(data);

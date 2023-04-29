@@ -42,12 +42,12 @@ export const GoogleTheme = createTheme({
             disabled: mode === THEME.DARK ? "rgba(255,255,255,.38)" : "#5f6368",
             gray: mode === THEME.DARK ? "#c5d3e3" : "#5f6368",
         },
-        red: { main: "#ff797e" },
-        green: { main: "#beff7f" },
-        blue: { main: "#7fbcff" },
-        yellow: { main: "#feff7f" },
-        gray: { main: "#464646" },
-        black: { main: "#000000" },
+        red: { main: "#ff797e", text: "black" },
+        green: { main: "#beff7f", text: "black" },
+        blue: { main: "#7fbcff", text: "black" },
+        yellow: { main: "#feff7f", text: "black" },
+        gray: { main: "#464646", text: "black" },
+        black: { main: "#000000", text: "black" },
 
         // Used by `getContrastText()` to maximize the contrast between
         // the background and the text.
@@ -56,6 +56,15 @@ export const GoogleTheme = createTheme({
         // two indexes within its tonal palette.
         // E.g., shift from Red 500 to Red 300 or Red 700.
         tonalOffset: 0.2,
+    },
+    typography: {
+        h2: {
+            fontFamily: [
+                'Space Grotesk', 'Franklin Gothic Medium', 'Arial Narrow', "Arial", "sans-serif"
+            ].join(','),
+            fontWeight: 700,
+            fontSize: "2rem",
+        }
     },
     components: {
         MuiButton: {

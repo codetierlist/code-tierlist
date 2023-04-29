@@ -18,7 +18,7 @@ export const NotLoggedIn = () => {
                     </div>
                 </div>
             </section>
-            <section>
+            <section class={style.section}>
                 <h2>Why test with us?</h2>
                 <p>We make the tedious part of programming-writing tests, fun and easier! Our platform allows you to write tests for your code and share them with others. It's a great way to learn and practice programming! Our platform is also a great way to test your code before you submit it to your professor.</p>
                 <Grid container spacing={2}>
@@ -36,7 +36,7 @@ export const NotLoggedIn = () => {
                     />
                 </Grid>
             </section>
-            <section>
+            <section class={style.section}>
                 <h2>See how well you're doing with an interactive tierlist.</h2>
                 {/* todo */}
             </section>
