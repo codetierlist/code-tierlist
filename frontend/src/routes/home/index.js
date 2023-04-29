@@ -9,7 +9,7 @@ const Home = () => {
 
 	console.log(userInfo);
 
-	if (!userInfo["loggedIn"]) { return <NotLoggedIn /> };
+	if (!userInfo["loggedIn"]) { return <NotLoggedIn /> }
 
 	return (
 		<div class={style.home}>

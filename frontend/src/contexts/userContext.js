@@ -1,5 +1,3 @@
 import { createContext } from "preact";
 
-const userContext = createContext({user: {}});
-
-export { userContext };
+export const userContext = createContext({user: {}});

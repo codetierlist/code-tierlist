@@ -26,7 +26,7 @@ const App = () => {
 
 	return (
 		<ThemeProvider theme={GoogleTheme}>
-			<userContext.Provider value={user} />
+			<userContext.Provider value={user}>
 				<CssBaseline />
 				<div id="app">
 					<Header />
@@ -38,7 +38,7 @@ const App = () => {
 						</Router>
 					</main>
 				</div>
-			<userContext.Provider />
+			</userContext.Provider>
 		</ThemeProvider>
 	);
 }
