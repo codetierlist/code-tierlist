@@ -8,9 +8,9 @@ interface AssignmentInfo {
   numTests: number;
 }
 
-@Controller('assignment')
+@Controller('assignments')
 export class AssignmentController {
-  @Post('assignments')
+  @Post('')
   @UseInterceptors(FilesInterceptor('files'))
   async createAssignment(
     @UploadedFiles() files: Express.Multer.File[],
@@ -22,7 +22,7 @@ export class AssignmentController {
     };
   }
 
-  @Get('assignments')
+  @Get('')
   async getAssignments(): Promise<AssignmentInfo[]> {
     return [
       {

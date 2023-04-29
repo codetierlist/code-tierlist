@@ -10,7 +10,7 @@ interface Result {
 
 @Controller('upload')
 export class UploadController {
-  @Post('/upload/tests/:assignmentId')
+  @Post('tests/:assignmentId')
   @UseInterceptors(FilesInterceptor('files'))
   async addTest(
     @Param('assignmentId') assignmentId: string,
@@ -22,7 +22,7 @@ export class UploadController {
     };
   }
 
-  @Post('upload/code/:assignmentId')
+  @Post('code/:assignmentId')
   @UseInterceptors(FilesInterceptor('files'))
   async testCode(
     @Param('assignmentId') assignmentId: string,
