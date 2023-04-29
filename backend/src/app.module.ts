@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UploadModule } from './upload/upload.module';
 import { AssignmentModule } from './assignment/assignment.module';
 import { AuthModule } from './auth/auth.module';
+import { ormConfig } from '../ormConfig';
 
 @Module({
   imports: [
@@ -17,12 +18,7 @@ import { AuthModule } from './auth/auth.module';
       isGlobal: true,
       cache: true,
     }),
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'mainDB',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(ormConfig),
     AnalyticsModule,
     UploadModule,
     AssignmentModule,

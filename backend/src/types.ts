@@ -5,10 +5,10 @@ export enum UserRole {
 
 export interface User {
   email: string;
-  username: string;
-  avatar: string;
+  password: string;
+  avatar?: string;
   role: UserRole;
-  mostRecentSubmission: string;
+  mostRecentSubmission?: string;
 }
 
 export interface Assignment {

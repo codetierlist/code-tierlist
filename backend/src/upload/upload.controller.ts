@@ -1,6 +1,7 @@
 import { Body, Controller, Param, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { TestCase } from 'src/types';
+import { UploadService } from './upload.service';
 
 interface Result {
   avatar: string;
@@ -10,16 +11,19 @@ interface Result {
 
 @Controller('upload')
 export class UploadController {
+  constructor(
+    private readonly uploadService: UploadService,
+  ) {}
+
   @Post('tests/:assignmentId')
   @UseInterceptors(FilesInterceptor('files'))
   async addTest(
     @Param('assignmentId') assignmentId: string,
     @UploadedFiles() files: Express.Multer.File[],
   ): Promise<TestCase> {
-    return {
-      id: 1,
-      input: 'some test files all in one here',
-    };
+    const allTests = this.uploadService.getContentFromAllFiles(files);
+    await this.uploadService.runTestAgainstSolution();
+    return this.uploadService.createTestCase();
   }
 
   @Post('code/:assignmentId')
