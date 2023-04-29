@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import style from './style.css';
 import { NotLoggedIn } from '../../components/NotLoggedIn/NotLoggedIn';
-import { userContext } from "../../contexts/UserContext";
+import { userContext } from "../../contexts/userContext";
 import { useContext } from 'preact/hooks';
 
 const Home = () => {
