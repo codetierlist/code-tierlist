@@ -56,7 +56,9 @@ const Login = (props) => {
                         <CardContent>
                             <form onSubmit={handleSubmit}>
                                 <Typography variant="h2" gutterBottom>
-                                    {window.location.pathname === "/register" ? "Register" : "Login"}
+                                    {
+                                        location.pathname === "/register" ? "Register" : "Login"
+                                    }
                                 </Typography>
                                 <Box sx={{
                                     display: "flex",
