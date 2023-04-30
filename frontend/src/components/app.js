@@ -30,7 +30,7 @@ const App = () => {
 
 		if (token) {
 			setAuthToken(token);
-			const backendUrl = "http://localhost:3000"; // TODO: Fix this
+			const backendUrl = "http://api.codetierlist.tech"; // TODO: Fix this
 			let response = await axios.get(backendUrl + "/auth/profile");
 			setUser(response.data);
 		}
@@ -42,7 +42,7 @@ const App = () => {
 		localStorage.removeItem("refresh_token");
 		setAuthToken(null);
 		setUser(null);
-		const backendUrl = "http://localhost:3000"; // TODO: Fix this
+		const backendUrl = "http://api.codetierlist.tech"; // TODO: Fix this
 		return axios.post(backendUrl + "/auth/logout", {
 			refresh_token,
 		});

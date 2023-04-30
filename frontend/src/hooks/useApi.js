@@ -3,7 +3,7 @@ import { userContext } from "../contexts/userContext";
 import { useState, useEffect, useContext} from 'preact/hooks';
 import { setAuthToken } from "../utils/setAuthToken";
 
-const backendUri = 'http://localhost:3000';
+const backendUri = 'http://api.codetierlist.tech';
 
 function f(endpoint, payload) {
   if (payload.method.toLowerCase() === 'get') {

@@ -20,7 +20,7 @@ const Login = (props) => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        const backendUrl = 'http://localhost:3000'; // TODO: fix url
+        const backendUrl = 'http://api.codetierlist.tech'; // TODO: fix url
         axios.post(backendUrl + '/auth' + path, {
             email: email,
             password: password
