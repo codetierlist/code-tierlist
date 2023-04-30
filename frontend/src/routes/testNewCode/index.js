@@ -22,12 +22,12 @@ export default function TestNewCode({ id }) {
 	const steps = [
 		{
 			name: "Submit working test",
-			content: <SubmitTest noButton id={id} />,
+			content: <SubmitTest noButton id={id} doOnClick={handleNext} />,
 			buttonText: "Validate test"
 		},
 		{
 			name: "Submit your code",
-			content: <SubmitCode noButton id={id} />,
+			content: <SubmitCode noButton id={id} doOnClick={handleNext} />,
 			buttonText: "Submit code"
 		},
 		{
@@ -162,7 +162,7 @@ export default function TestNewCode({ id }) {
 								{
 									loading && <CircularProgress size={16} sx={{
 										marginRight: "0.5em"
-									}}/>
+									}} />
 								}
 								{steps[activeStep].buttonText}
 							</Button>

@@ -44,7 +44,25 @@ const Home = () => {
 		}
 	}, [userInfo])
 
+	// HACK i don't know how to use position: sticky apparently
+	const [sideSticky, setSideSticky] = useState(false);
 
+	useEffect(() => {
+		const handleScroll = () => {
+			if (window.scrollY > 3.5 * parseFloat(getComputedStyle(document.documentElement).fontSize)) {
+				setSideSticky(window.scrollY - 3.5 * parseFloat(getComputedStyle(document.documentElement).fontSize));
+			} else {
+				setSideSticky(0);
+			}
+		}
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		}
+	}, [])
+
+
+	// prevent rendering if user is not logged in
 	if (userInfo && Object.keys(userInfo).length === 0) { return <NotLoggedIn /> }
 
 	return (
@@ -52,14 +70,14 @@ const Home = () => {
 			marginTop: "0",
 		}}>
 			<Grid item xs={12} md={3} sx={{
-					height: {
+					minHeight: {
 						xs: "unset",
 						md: "100vh",
 					},
-					position: "sticky",
-					top: "1em",
+					position: "relative",
+					top: sideSticky,
 					backgroundColor: "#212121",
-					zIndex: 0,
+					zIndex: 0
 				}}>
 					<Typography
 						variant="h2"

@@ -1,6 +1,8 @@
 .footer {
 	background: #222;
 	display: block;
+	z-index: 123487964325689734;
+	position: relative;
 	margin-top: 2em;
 }
 
