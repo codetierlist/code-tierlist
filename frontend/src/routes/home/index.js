@@ -47,43 +47,43 @@ const Home = () => {
 	// HACK i don't know how to use position: sticky apparently
 	const [sideSticky, setSideSticky] = useState(false);
 
-	useEffect(() => {
-		const handleScroll = () => {
-			if (window.scrollY > 3.5 * parseFloat(getComputedStyle(document.documentElement).fontSize)) {
-				setSideSticky(window.scrollY - 3.5 * parseFloat(getComputedStyle(document.documentElement).fontSize));
-			} else {
-				setSideSticky(0);
-			}
-		}
-		window.addEventListener("scroll", handleScroll);
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		}
-	}, [])
+	// useEffect(() => {
+	//  const handleScroll = () => {
+	//      if (window.scrollY > 3.5 * parseFloat(getComputedStyle(document.documentElement).fontSize)) {
+	//          setSideSticky(window.scrollY - 3.5 * parseFloat(getComputedStyle(document.documentElement).fontSize));
+	//      } else {
+	//          setSideSticky(0);
+	//      }
+	//  }
+	//  window.addEventListener("scroll", handleScroll);
+	//  return () => {
+	//      window.removeEventListener("scroll", handleScroll);
+	//  }
+	// }, [])
 
 
 	// prevent rendering if user is not logged in
 	if (userInfo && Object.keys(userInfo).length === 0) { return <NotLoggedIn /> }
 
 	return (
-		<Grid class={style.home} container spacing={2} sx={{
-			marginTop: "0",
+		<Box class={style.home} sx={{
+			display: "flex",
+			width: "100%",
 		}}>
-			<Grid item xs={12} md={3} sx={{
-					minHeight: {
-						xs: "unset",
-						md: "100vh",
-					},
-					position: "relative",
-					top: sideSticky,
+			<Box sx={{
 					backgroundColor: "#171717",
-					zIndex: 0
+					minHeight: "200px",
+					overflow: "auto",
+					position: "sticky",
+					top: "0",
+					height: "100vh",
+					width: "30%",
 				}}>
 					<Typography
 						variant="h2"
 						class={style.yourProjects}
 						sx={{
-							margin: "0 1rem 1rem 1rem"
+							margin: "1rem"
 						}}
 					>Your projects</Typography>
 					{
@@ -93,13 +93,17 @@ const Home = () => {
 							)
 						})
 					}
-			</Grid>
-			<Grid item xs={12} md={9}>
+			</Box>
+			<Box sx={{
+				width: "60%",
+				height: "150vh",
+				minHeight: "1000px",
+			}}>
 				<Typography
 					variant="h2"
 					class={style.yourProjects}
 					sx={{
-						margin: "0 1rem 1rem 1rem"
+						margin: "1rem"
 					}}
 				>
 					All projects
@@ -111,8 +115,8 @@ const Home = () => {
 						)
 					})
 				}
-			</Grid>
-		</Grid>
+			</Box>
+		</Box>
 	);
 };
 
@@ -123,7 +127,7 @@ const Projects = props => {
         } class={style.noUnderline}>
 			<Card sx={{
 				margin: "1em",
-				width: "90%",
+				width: "100%",
 				backgroundColor: "#464646",
 				border: "none"
 			}}>
