@@ -19,7 +19,7 @@ const Header = () => {
 		</a>
 		<nav>
 			{ userInfo["role"] === "professor" &&
-				<Link activeClassName={style.active} href="/new-project">
+				<Link activeClassName={style.active} href="/create">
 					+ New Project
 				</Link>
 			}
