@@ -1,9 +1,7 @@
-import { Box, Button, Grid, Card, CardContent, Typography } from "@mui/material";
-import { userContext } from "../../contexts/userContext";
+import { Box, Grid, Typography } from "@mui/material";
 import { Fragment } from "preact";
-import { useContext } from "preact/hooks";
-import { InitialsAvatar } from "../../components/InitialsAvatar/InitialsAvatar";
 import { GetGradeColor } from "../../components/GradeColor/GradeColor";
+import { InitialsAvatar } from "../../components/InitialsAvatar/InitialsAvatar";
 import style from "./style.css";
 
 const Hardcode = [

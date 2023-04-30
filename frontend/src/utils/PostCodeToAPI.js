@@ -11,10 +11,15 @@ export const postCodeToAPI = async ({code, id = "bruh", url = "tests"}) => {
     const response = await fetch(`http://api.codetierlist.tech/${url}/${id}`, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "text/plain"
         },
         body: code
     });
+
+    console.log("====");
+    console.log(response);
+    console.log(code);
+    console.log("====");
 
     // check if 200 or 400. 200 means success, 400 means failure
     // return true if 200, false if 400

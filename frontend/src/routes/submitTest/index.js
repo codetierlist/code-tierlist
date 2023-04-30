@@ -1,8 +1,7 @@
-import { Box, Button, Typography, CircularProgress } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 import { useState } from 'preact/hooks';
 import { postCodeToAPI } from '../../utils/PostCodeToAPI';
-
-import Editor from '@monaco-editor/react';
+import SubmitTestRaw from "./submitTestRaw";
 
 /**
  * A component that allows the user to submit a test case.
@@ -21,7 +20,7 @@ const SubmitTest = ({buttonName = "Submit Test", doOnClick = null, noButton = fa
     const submit = () => {
         setLoading(true);
 
-        postCodeToAPI({url: "test", id, code})
+        postCodeToAPI({id, code})
             .then((res) => {
                 console.log(res);
                 setLoading(false);
@@ -42,19 +41,9 @@ const SubmitTest = ({buttonName = "Submit Test", doOnClick = null, noButton = fa
             maxWidth: "1020px",
             margin: "auto",
         }}>
-            <Typography sx={{ margin: "3rem 0 1rem 0" }} variant="h2">
-                Submit Test {id}
-            </Typography>
-            <Typography sx={{ margin: "1rem 0" }}>
-                To test your code against your classmates’ tests, you will have to submit at least one test case to our database. Please write or paste a functioning test case here for us to validate.
-            </Typography>
-            <Editor
-                height="60vh"
-                defaultLanguage="python"
-                theme="vs-dark"
-                defaultValue="# insert your test here"
-                onChange={(value) => setCode(value)}
-            />
+
+            <SubmitTestRaw setCode={setCode} id={id} />
+
             {!noButton &&
                 <Box sx={{
                     display: "flex",
