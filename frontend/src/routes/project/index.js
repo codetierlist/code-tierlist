@@ -29,7 +29,7 @@ const Project = ({id}) => {
                 console.log(err);
             })
             console.log(projectData);
-    })
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <Box component="section" sx={{
