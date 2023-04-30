@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, Post, Request, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { Get, Body, Controller, HttpStatus, Post, Request, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign-in';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
@@ -13,18 +13,16 @@ export class AuthController {
   @Post('register')
   async register(
     @Body() body: CreateUserDto,
-  ): Promise<any> {
-    return this.authService.createUser(body);
+  ): Promise<{ access_token: string; refresh_token: string;}> {
+    const user = await this.authService.createUser(body);
+    return this.authService.login(user);
   }
-
+  
   @Post('login')
   async login(
-    @Request() req,
     @Body() body: SignInDto,
   ): Promise<any> {
     if (body.refreshToken) {
-      const refresh_token = req.headers.authorization?.split(" ")[1];
-      if (!refresh_token) throw new UnauthorizedException();
       return this.authService.refreshToken(body.refreshToken);
     } else if (body.email && body.password) {
       const user = await this.authService.validateUser(body.email, body.password);
@@ -32,12 +30,11 @@ export class AuthController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
   @Post('logout')
   async logout(
-    @Body() body: { refreshToken: string }
+    @Body() body: { refresh_token: string }
   ): Promise<{ status: HttpStatus; message: string }> {
-    const disabled = await this.authService.disableRefreshToken(body.refreshToken);
+    const disabled = await this.authService.disableRefreshToken(body.refresh_token);
     if (disabled) {
       return {
         status: HttpStatus.OK,
@@ -49,5 +46,36 @@ export class AuthController {
         message: "Refresh token not found",
       };
     }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  async getProfile(
+    @Request() req,
+  ): Promise<any> {
+    return {
+      avatar: req.user.avatar,
+      role: req.user.role,
+      myProjects: [
+				{
+					name: "CSC148 A2",
+					numTest: 150,
+					grade: "S",
+					description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
+				},
+				{
+					name: "CSC236 A1",
+					numTest: 51,
+					grade: "C",
+					description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
+				},
+				{
+					name: "CSC209 A4",
+					numTest: 20,
+					grade: "B",
+					description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
+				}
+			]
+    };
   }
 }

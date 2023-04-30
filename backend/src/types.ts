@@ -8,7 +8,6 @@ export interface User {
   password: string;
   avatar?: string;
   role: UserRole;
-  mostRecentSubmission?: string;
 }
 
 export interface Assignment {
@@ -22,16 +21,9 @@ export interface TestCase {
   input: string;
 }
 
-export enum TestResultStatus {
-  SUCCESS = 'success',
-  INCORRECT_OUTPUT = 'incorrect-output',
-  RUNTIME_ERROR = 'runtime-error',
-  TIMEOUT = 'timeout',
-  COMPILATION_ERROR = 'compilation-error',
-}
-
 export interface TestResult {
-  id: number;
-  status: TestResultStatus;
+  submission: string;
+  numPassed: number;
+  numTests: number;
   timestamp: Date;
 }

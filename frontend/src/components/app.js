@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { Router } from 'preact-router';
 
 import Header from './header';
@@ -18,57 +17,56 @@ import SubmitTest from '../routes/submitTest';
 import TestNewCode from '../routes/testNewCode';
 import TierList from '../routes/tierlist';
 import Login from '../routes/login';
+import RouteGuard from './RouteGuard';
+import { Redirect } from './Redirect';
+import { setAuthToken } from '../utils/setAuthToken';
+import axios from 'axios';
 
 const App = () => {
-	const [user, setUser] = useState({});
+	const [user, setUser] = useState(null);
 
-	useEffect(() => {
-		const data = {
-			role: "professor", // student, professor
-			name: "John Doe",
-			myProjects: [
-				{
-					name: "CSC148 A2",
-					numTests: 150,
-					grade: "S",
-					description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-				},
-				{
-					name: "CSC236 A1",
-					numTests: 51,
-					grade: "C",
-					description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-				},
-				{
-					name: "CSC209 A4",
-					numTests: 20,
-					grade: "B",
-					description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-				}
-			]
+	useEffect(async () => {
+		const token = localStorage.getItem("access_token");
+
+		if (token) {
+			setAuthToken(token);
+			const backendUrl = "http://localhost:3000"; // TODO: Fix this
+			let response = await axios.get(backendUrl + "/auth/profile");
+			setUser(response.data);
 		}
-
-		setUser(data);
 	}, []);
+
+	const logout = () => {
+		const refresh_token = localStorage.getItem("refresh_token");
+		localStorage.removeItem("access_token");
+		localStorage.removeItem("refresh_token");
+		setAuthToken(null);
+		setUser(null);
+		const backendUrl = "http://localhost:3000"; // TODO: Fix this
+		return axios.post(backendUrl + "/auth/logout", {
+			refresh_token,
+		});
+	}
 
 	return (
 		<ThemeProvider theme={GoogleTheme}>
-			<userContext.Provider value={user}>
+			<userContext.Provider value={[user, setUser]}>
 				<CssBaseline />
 				<div id="app">
-					<Header />
+					<Header logout={logout} />
 					<main>
 						<Router>
 							<Home path="/" />
-							<Profile path="/profile/" user="me" />
-							<Profile path="/profile/:user" />
-							<Project path="/project/:id" />
-							<SubmitCode path="/submit-code/:id" />
-							<SubmitTest path="/submit-test/:id" />
-							<TestNewCode path="/test-new-code/:id" />
-							<TierList path="/tierlist/:id" />
-							<Login path="/login" />
-							<Create path="/create" />
+							<Login path="/login" setUser={setUser} />
+							<Login path="/register" />
+							<RouteGuard path="/create" component={Create} />
+							<RouteGuard path="/profile" component={Profile} />
+							<RouteGuard path="/assignments/:id" component={Project} />
+							<RouteGuard path="/submit-code/:id" component={SubmitCode} />
+							<RouteGuard path="/submit-test/:id" component={SubmitTest} />
+							<RouteGuard path="/test-new-code/:id" component={TestNewCode} />
+							<RouteGuard path="/tierlist/:id" component={TierList} />
+							<Redirect to="/" default />
 						</Router>
 					</main>
 					<Footer />

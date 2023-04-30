@@ -3,33 +3,22 @@ import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import { userContext } from "../../contexts/userContext";
 
 import { useEffect, useState, useContext } from "preact/hooks";
+import useAuthApi from "../../hooks/useApi";
 
-const Project = ({id}) => {
-    // HACK
-    const [projectData, setProjectData] = useState({
-        name: "CSC148 A2",
-        numTest: 150,
-        description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-    });
+const Project = (props) => {
+    const [loading, data, error] = useAuthApi(`/assignments/${props.id}`, { method: "GET" });
 
-    useEffect(() => {
-        // if 404, setProjectData to default
-        fetch(`http://api.codetierlist.tech/assignments`, {
-            method: "GET"
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                data.forEach((assignment) => {
-                    if (assignment["name"].toLowerCase().replaceAll(" ", "-") === id.toLowerCase()) {
-                        setProjectData(assignment);
-                    }
-                })
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-            console.log(projectData);
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
+    if (error) {
+        console.log(error);
+    }
+
+    if (data) {
+        console.log(data);
+    }
 
     return (
         <Box component="section" sx={{
@@ -37,22 +26,22 @@ const Project = ({id}) => {
             margin: "auto",
         }}>
             <HeroCard
-                sidebarTitle={projectData["name"] ? projectData["name"] : "Loading" }
-                numTests={projectData["numTests"] ? projectData["numTests"] : "Loading" }
-                name={projectData["name"] ? projectData["name"] : "Loading" }
+                sidebarTitle={data.name}
+                numTest={data.numTests}
+                name={data.name}
             />
             <Typography sx={{ margin: "3rem 1rem 1rem 1rem" }} variant="h2">
                 Description
             </Typography>
             <Typography sx={{ margin: "1rem" }}>
-                {projectData["description"]}
+                {data.description}
             </Typography>
         </Box>
     )
 }
 
 const HeroCard = props => {
-    const user = useContext(userContext);
+    const [user] = useContext(userContext);
 
 	return (
 		<Card sx={{

@@ -34,7 +34,7 @@ const Create = () => {
     const [description, setDescription] = useState("");
     const [solution, setSolution] = useState("");
 
-    if (user && user["role"] !== "professor") { return <Typography>You are not a professor</Typography> }
+    if (user && user["role"] !== "instructor") { return <Typography>You are not a instructor</Typography> }
 
     return (
         <Box component="section" sx={{

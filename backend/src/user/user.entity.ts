@@ -1,5 +1,6 @@
 import { UserRole, User as IUser } from "../types";
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Exclude } from "class-transformer";
 
 @Entity()
 export class User implements IUser {
@@ -10,6 +11,7 @@ export class User implements IUser {
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @Column({
@@ -24,7 +26,4 @@ export class User implements IUser {
 
   @Column({ nullable: true })
   avatar?: string;
-
-  @Column({ nullable: true})
-  mostRecentSubmission?: string;
 }

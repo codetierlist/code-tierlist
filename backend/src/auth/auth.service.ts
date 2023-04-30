@@ -13,10 +13,12 @@ import { v4 } from "uuid";
 import { User } from "../user/user.entity";
 import { UserService } from "../user/user.service";
 import { CreateUserDto } from "src/user/dto/create-user.dto";
+import { UserRole } from "src/types";
 
 export interface IPayload {
   email: string;
   sub: number;
+  role: UserRole;
 }
 
 @Injectable()
@@ -40,19 +42,17 @@ export class AuthService {
 
   async createUser(
     data: CreateUserDto
-  ): Promise<Omit<User, "password" | "refresh_tokens" | "id">> {
+  ): Promise<User> {
     const hashedPassword = await bcrypt.hash(data.password, 10);
     /* eslint-disable */
-    const { password, id, ...rest } =
-      await this.userService.createUser({
+    return this.userService.createUser({
         ...data,
         password: hashedPassword,
       });
-    return rest;
   }
 
   async createPayload(user: User): Promise<IPayload> {
-    return { email: user.email, sub: user.id };
+    return { email: user.email, sub: user.id, role: user.role };
   }
 
   async createAccessToken(payload: IPayload): Promise<string> {

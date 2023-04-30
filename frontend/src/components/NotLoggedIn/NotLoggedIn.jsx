@@ -3,6 +3,7 @@ import { Fragment } from "preact";
 import { GetGradeColor } from "../../components/GradeColor/GradeColor";
 import { InitialsAvatar } from "../../components/InitialsAvatar/InitialsAvatar";
 import style from './style.css';
+import { Link } from "preact-router";
 
 /**
  * This is the landing page that is shown when the user is not logged in.
@@ -16,14 +17,18 @@ export const NotLoggedIn = () => {
                     <div class={style.heroContent}>
                         <h1 class={style.header}>Code Tierlist</h1>
                         <h2 class={style.subtitle}>The leading place to test your code</h2>
-                        <Button variant="contained" color="success" sx={{ marginRight: "1.5em" }}>Sign up</Button>
-                        <Button color="green">Sign in</Button>
+                        <Link href="/register">
+                            <Button variant="contained" color="success" sx={{ marginRight: "1.5em" }}>Sign up</Button>
+                        </Link>
+                        <Link href="/login">
+                            <Button color="green">Sign in</Button>
+                        </Link>
                     </div>
                 </div>
             </section>
             <section class={style.section}>
                 <h2>Why test with us?</h2>
-                <p>We make the tedious part of programming-writing tests, fun and easier! Our platform allows you to write tests for your code and share them with others. It's a great way to learn and practice programming! Our platform is also a great way to test your code before you submit it to your professor.</p>
+                <p>We make the tedious part of programming-writing tests, fun and easier! Our platform allows you to write tests for your code and share them with others. It's a great way to learn and practice programming! Our platform is also a great way to test your code before you submit it to your instructor.</p>
                 <Grid container spacing={2}>
                     <Reason
                         title="Step 1"

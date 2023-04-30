@@ -1,6 +1,9 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
-import { TestCase } from 'src/types';
+import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
+import { TestCase, UserRole } from 'src/types';
 import { UploadService } from './upload.service';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from 'src/auth/roles.decorator';
 
 interface Result {
   avatar: string;
@@ -8,6 +11,8 @@ interface Result {
   numTests: number;
 }
 
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles(UserRole.STUDENT)
 @Controller('upload')
 export class UploadController {
   constructor(

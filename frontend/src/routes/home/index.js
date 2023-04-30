@@ -1,49 +1,48 @@
+import style from './style.css';
 import { Box, Card, CardContent, CardActionArea, Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'preact/hooks';
 import { NotLoggedIn } from '../../components/NotLoggedIn/NotLoggedIn';
 import { SidebarCard } from '../../components/SidebarCard/SidebarCard';
+import { useEffect, useState } from 'preact/hooks';
+import useAuthApi from '../../hooks/useApi';
 import { userContext } from "../../contexts/userContext";
-import style from './style.css';
 
 const Home = () => {
-	const userInfo = useContext(userContext);
-	const [allAssignments, setAllAssignments] = useState([]);
+	const [userInfo] = useContext(userContext);
+
+	const [loading, data, error] = useAuthApi('/assignments', { method: 'get' });
+
+	if (loading) {
+		return <div>Loading...</div>
+	}
+
+	if (error) {
+		console.log(error);
+	}
+
+	if (data) {
+		console.log(data);
+	}
+
+	// HACK i don't know how to use position: sticky apparently
+	const [sideSticky, setSideSticky] = useState(false);
 
 	useEffect(() => {
-		if (userInfo && Object.keys(userInfo).length !== 0) {
-			fetch("http://api.codetierlist.tech/assignments", {
-				method: "GET"
-			})
-				.then((res) => res.json())
-				.then((data) => {
-					setAllAssignments(data);
-				})
-				.catch((err) => {
-					const errorData = [
-						{
-							name: "CSC148 A2",
-							numTests: 150,
-							description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-						},
-						{
-							name: "CSC236 A1",
-							numTests: 51,
-							description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-						},
-						{
-							name: "CSC209 A4",
-							numTests: 20,
-							description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-						}
-					];
-					setAllAssignments(errorData);
-					console.log(err);
-				})
+		const handleScroll = () => {
+			if (window.scrollY > 3.5 * parseFloat(getComputedStyle(document.documentElement).fontSize)) {
+				setSideSticky(window.scrollY - 3.5 * parseFloat(getComputedStyle(document.documentElement).fontSize));
+			} else {
+				setSideSticky(0);
+			}
 		}
-	}, [userInfo])
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		}
+	}, [])
 
 	// prevent rendering if user is not logged in
-	if (userInfo && Object.keys(userInfo).length === 0) { return <NotLoggedIn /> }
+	if (!userInfo || Object.keys(userInfo).length === 0) { return <NotLoggedIn /> }
 
 	return (
 		<Box class={style.home} sx={{
@@ -89,7 +88,7 @@ const Home = () => {
 					All projects
 				</Typography>
 				{
-					allAssignments.map((i) => {
+					data.map((i) => {
 						return (
 							<Projects name={i.name} numTests={i.numTests} grade={i.grade} key={i} description={i.description} />
 						)
