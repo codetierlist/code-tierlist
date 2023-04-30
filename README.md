@@ -1,5 +1,5 @@
 <h1><picture>
-  <img alt="Code Tier List" src="./frontend/src/assets/favicon.svg" height="25"> 
+  <img alt="Code Tier List" src="./frontend/src/assets/favicon.svg" height="25">
 </picture>
 Code Tierlist
 </h1>
@@ -13,7 +13,7 @@ On Code Tierlist, instructors can create new projects (assignments) for students
 Follow along below to ✨**learn more**✨:
 
 <picture>
-  <img alt="Code Tier List Demo" src="./frontend/src/assets/demo.gif" height=""> 
+  <img alt="Code Tier List Demo" src="./frontend/src/assets/demo.gif" height="">
 </picture>
 
 
@@ -42,6 +42,7 @@ While students do provide their test cases and code to rank their progress, thes
 * Backend
     * NestJS ☕
     * Docker 🚢
+    * Postgres 🐘
 
 ### 📃 Requirements:
 Contact [🔧support](mailto:support@codetierlist.tech) for system requirements and setup. The software is currently under heavy development and thus requirements are not set in stone.
@@ -53,4 +54,4 @@ Code Tier List is **free and open-source software** licensed under the **MIT Lic
 You can open issues for bugs you've found or features you think are missing. You can also submit pull requests to this repository.
 
 ## ⚖️ License
-MIT License <img alt="MIT" src="./frontend/src/assets/MIT-logo.png" height="13" style="display:inline;"> 
+MIT License <img alt="MIT" src="./frontend/src/assets/MIT-logo.png" height="13" style="display:inline;">

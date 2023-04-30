@@ -1,56 +1,50 @@
-import { Box, Button, Grid, Card, CardContent, Typography } from "@mui/material";
-
-import { userContext } from "../../contexts/userContext";
-
+import { Box, Grid, Typography } from "@mui/material";
 import { Fragment } from "preact";
-
-import { useContext } from "preact/hooks";
-
-import { InitialsAvatar } from "../../components/InitialsAvatar/InitialsAvatar";
-
 import { GetGradeColor } from "../../components/GradeColor/GradeColor";
-
+import { InitialsAvatar } from "../../components/InitialsAvatar/InitialsAvatar";
 import style from "./style.css";
 
 const Hardcode = [
     {
         tier: "S",
         people: [
-            "John Doe",
-            "Jane Doe",
-            "John Smith",
+            "Clara",
+            "Haruno Sora",
+            "Kobayashi Matcha",
         ]
     },
     {
         tier: "A",
         people: [
-            "John Doe",
-            "Jane Doe",
-            "John Smith",
+            "Yuezheng Ling",
+            "Vocaloid Matryoshka Names",
+            "Nekomura Iroha",
+            "Yuezheng Longya",
+            "Kobayashi Matcha",
+            "Kizuna Akari",
         ]
     },
     {
         tier: "B",
         people: [
-            "John Doe",
-            "Jane Doe",
-            "John Smith",
+            "Megurine Luka",
+            "Yuzuki Yukari",
+            "Utatane Piko",
+            "You"
         ]
     },
     {
         tier: "C",
         people: [
-            "John Doe",
-            "Jane Doe",
-            "John Smith",
+            "Tone Rion",
+            "Sweet Ann",
         ]
     },
     {
         tier: "F",
         people: [
-            "John Doe",
-            "Jane Doe",
-            "John Smith",
+            "Sf-A2 Miki",
+            "Masaoka Azuki",
         ]
     },
 ]
@@ -79,6 +73,12 @@ const TierList = () => {
             marginTop: "0",
             padding: "2em",
         }}>
+            <Typography sx={{ margin: "1rem 0 0 0" }} variant="h2">
+                Tier list!
+            </Typography>
+            <Typography sx={{ margin: "1rem 0 2rem 0" }}>
+                See how you compare to other people!
+            </Typography>
             <Grid container spacing={2} sx={{
                 background: "black",
                 padding: "2em"
@@ -111,6 +111,7 @@ const TierList = () => {
                                         <InitialsAvatar
                                             name={person}
                                             key={index}
+                                            className={ person === "You" ? style.you : "" }
                                             sx={{
                                                 margin: "2em 1em",
                                             }}

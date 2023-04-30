@@ -58,7 +58,7 @@ const HeroCard = props => {
 				}}>
 					<Box>
 						<Typography variant="h2" gutterBottom>{props.name}</Typography>
-						{props.numTest} tests
+						{props.numTests} tests
 					</Box>
                     <Box>
                         {
