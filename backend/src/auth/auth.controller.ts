@@ -3,6 +3,8 @@ import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign-in';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
+import { LocalAuthGuard } from './guards/local-auth.guard';
+import { User } from 'src/user/user.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -13,10 +15,11 @@ export class AuthController {
   @Post('register')
   async register(
     @Body() body: CreateUserDto,
-  ): Promise<any> {
+  ): Promise<Omit<User, "password" | "refresh_tokens" | "id" >> {
     return this.authService.createUser(body);
   }
 
+  @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(
     @Request() req,

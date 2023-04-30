@@ -13,10 +13,12 @@ import { v4 } from "uuid";
 import { User } from "../user/user.entity";
 import { UserService } from "../user/user.service";
 import { CreateUserDto } from "src/user/dto/create-user.dto";
+import { UserRole } from "src/types";
 
 export interface IPayload {
   email: string;
   sub: number;
+  role: UserRole;
 }
 
 @Injectable()
@@ -52,7 +54,7 @@ export class AuthService {
   }
 
   async createPayload(user: User): Promise<IPayload> {
-    return { email: user.email, sub: user.id };
+    return { email: user.email, sub: user.id, role: user.role };
   }
 
   async createAccessToken(payload: IPayload): Promise<string> {
