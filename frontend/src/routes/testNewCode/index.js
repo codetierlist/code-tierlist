@@ -89,8 +89,12 @@ export default function TestNewCode({ id }) {
 				break;
 			case 2: // View tier list
 				// go home
-				if (typeof window !== "undefined") {
-					window.location.href = "/";
+				try {
+					if (typeof window !== "undefined") {
+						window.location.href = "/";
+					}
+				} catch (err) {
+					console.log(err);
 				}
 				break;
 		}

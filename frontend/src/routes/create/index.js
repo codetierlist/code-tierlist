@@ -88,7 +88,11 @@ const Create = () => {
                         PublishAssignment(name, description, solution)
                             .then(() => {
                                 setLoading(false);
-                                window.location.href = "/"; // HACK
+                                try {
+                                    if (typeof window !== "undefined") { window.location.href = "/"; } // HACK
+                                } catch (err) {
+                                    console.log(err);
+                                }
                             })
                             .catch((err) => {
                                 console.log(err);
