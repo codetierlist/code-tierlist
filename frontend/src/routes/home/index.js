@@ -22,17 +22,17 @@ const Home = () => {
 					const errorData = [
 						{
 							name: "CSC148 A2",
-							numTest: 150,
+							numTests: 150,
 							description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
 						},
 						{
 							name: "CSC236 A1",
-							numTest: 51,
+							numTests: 51,
 							description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
 						},
 						{
 							name: "CSC209 A4",
-							numTest: 20,
+							numTests: 20,
 							description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
 						}
 					];
@@ -69,7 +69,7 @@ const Home = () => {
 					{
 						userInfo["myProjects"].map((i) => {
 							return (
-								<SidebarCard name={i.name} numTest={i.numTest} grade={i.grade} key={i} />
+								<SidebarCard name={i.name} numTests={i.numTests} grade={i.grade} key={i} />
 							)
 						})
 					}
@@ -91,7 +91,7 @@ const Home = () => {
 				{
 					allAssignments.map((i) => {
 						return (
-							<Projects name={i.name} numTest={i.numTest} grade={i.grade} key={i} description={i.description} />
+							<Projects name={i.name} numTests={i.numTests} grade={i.grade} key={i} description={i.description} />
 						)
 					})
 				}
@@ -128,7 +128,7 @@ const Projects = props => {
 					<Box sx={{
 						fontSize: "0.8rem",
 					}}>
-						{props.numTest} tests
+						{props.numTests} tests
 					</Box>
 				</CardContent>
 			</Card>

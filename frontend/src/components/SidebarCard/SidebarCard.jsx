@@ -22,7 +22,7 @@ export const SidebarCard = props => {
                     }}>
                         <Box>
                             <strong class={style.sidebarTitle}>{props.name}</strong> <br />
-                            {props.numTest} tests
+                            {props.numTests} tests
                             {props.description && <p>{props.description}</p>}
                         </Box>
                         <Box>
