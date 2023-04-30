@@ -21,7 +21,6 @@
 	padding: 0 1rem;
 	color: #fff;
 	text-decoration: none;
-	line-height: 3.5rem;
 }
 
 .header a:hover,
@@ -51,6 +50,7 @@
 .header nav {
 	align-items: center;
 	display: flex;
+	vertical-align: middle;
 }
 
 .header nav a.active {

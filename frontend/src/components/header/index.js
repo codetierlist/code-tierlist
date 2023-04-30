@@ -26,6 +26,7 @@ const Header = () => {
 			<Link
 				activeClassName={style.active}
 				href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+				title="Logout"
 			>
 				<Logout fontSize="small" />
 			</Link>

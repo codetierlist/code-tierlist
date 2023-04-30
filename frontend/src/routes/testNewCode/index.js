@@ -63,13 +63,13 @@ export default function TestNewCode({ id }) {
 						console.log(res);
 						setCompleted({ ...completed, 0: true });
 						setLoading(false);
-						handleNext();
+						setNewActiveStep();
 					})
 					.catch((err) => {
 						console.log(err);
 						setLoading(false);
-					}
-					);
+						alert(err);
+					});
 				break;
 			case 1: // Submit code
 				postCodeToAPI({url: "code", id, code: steps[1].content.props.code})
@@ -77,21 +77,24 @@ export default function TestNewCode({ id }) {
 						console.log(res);
 						setCompleted({ ...completed, 1: true });
 						setLoading(false);
-						handleNext();
+						setNewActiveStep();
 					})
 					.catch((err) => {
 						console.log(err);
 						setLoading(false);
+						alert(err);
 					});
 				break;
 		}
+	};
 
+	const setNewActiveStep = () => {
 		const newActiveStep =
-			isLastStep() && !allStepsCompleted()
-				? // It's the last step, but not all steps have been completed,
-					// find the first step that has been completed
-					steps.findIndex((step, i) => !(i in completed))
-				: activeStep + 1;
+		isLastStep() && !allStepsCompleted()
+			? // It's the last step, but not all steps have been completed,
+				// find the first step that has been completed
+				steps.findIndex((step, i) => !(i in completed))
+			: activeStep + 1;
 		setActiveStep(newActiveStep);
 	};
 
