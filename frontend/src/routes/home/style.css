@@ -1,6 +1,7 @@
 .home {
 	padding-top: 3.5rem;
-	height: 100vh;
+	min-height: 100vh;
+	height: 100%;
 }
 
 .noUnderline {

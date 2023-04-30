@@ -4,6 +4,7 @@ import style from './style.css';
 import { InitialsAvatar } from '../InitialsAvatar/InitialsAvatar';
 import { userContext } from "../../contexts/userContext";
 import { useContext } from 'preact/hooks';
+import { Logout } from "@mui/icons-material";
 
 const NAME = "John";
 
@@ -22,8 +23,12 @@ const Header = () => {
 					+ New Project
 				</Link>
 			}
-			<Link activeClassName={style.active} href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-				&#9881;
+			<Link
+				activeClassName={style.active}
+				href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+				title="Logout"
+			>
+				<Logout fontSize="small" />
 			</Link>
 			<Link activeClassName={style.active} href={`/profile/${NAME.replaceAll(" ", "-").toLowerCase()}`}>
 				<InitialsAvatar name={NAME} />
