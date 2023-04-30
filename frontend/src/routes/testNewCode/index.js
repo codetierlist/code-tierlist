@@ -118,7 +118,7 @@ export default function TestNewCode({ id }) {
 	};
 
 	return (
-		<Box sx={{ maxWidth: '90%', margin: "2em auto 0 auto" }}>
+		<Box sx={{ maxWidth: '90%', margin: "2em auto" }}>
 			<Stepper nonLinear activeStep={activeStep}>
 				{steps.map((step, index) => (
 					<Step key={step} completed={completed[index]}>
