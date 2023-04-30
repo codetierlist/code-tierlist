@@ -17,7 +17,7 @@ const Header = () => {
 			<h1>Code Tierlist</h1>
 		</a>
 		<nav>
-			{ userInfo["role"] === "professor" &&
+			{ userInfo["role"] === "instructor" &&
 				<Link activeClassName={style.active} href="/new-project">
 					+ New Project
 				</Link>

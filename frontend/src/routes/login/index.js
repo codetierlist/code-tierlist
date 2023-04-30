@@ -1,9 +1,5 @@
 import { Box, Button, Card, CardContent, Typography, TextField } from "@mui/material";
 
-import { userContext } from "../../contexts/userContext";
-
-import { useContext } from "preact/hooks";
-
 import { GitHub } from "@mui/icons-material";
 
 import style from "./style.css";
@@ -18,10 +14,10 @@ const Login = () => {
                     }}>
                         <CardContent>
                             <Typography variant="h2" gutterBottom>
-                                Sign up / Login
+                                Login
                             </Typography>
                             <Typography variant="body1" gutterBottom>
-                                Login to your account to access your projects. An account will be created if does not exist.
+                                Login to your account to access your projects.
                             </Typography>
                             <Box sx={{
                                 display: "flex",
