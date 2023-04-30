@@ -2,13 +2,9 @@ FROM node:alpine
 
 WORKDIR /codetierlist
 
-COPY package*.json ./
-
-RUN npm install -g npm@latest
+COPY . .
 
 RUN npm install
-
-COPY . .
 
 RUN npm run build
 
