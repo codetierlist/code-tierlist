@@ -1,11 +1,9 @@
-import { h } from 'preact';
-import style from './style.css';
+import { Box, Card, CardContent, CardActionArea, Typography } from '@mui/material';
+import { useContext, useEffect, useState } from 'preact/hooks';
 import { NotLoggedIn } from '../../components/NotLoggedIn/NotLoggedIn';
-import { userContext } from "../../contexts/userContext";
-import { useContext } from 'preact/hooks';
-import { Grid, Box, Card, CardContent, Typography } from '@mui/material';
 import { SidebarCard } from '../../components/SidebarCard/SidebarCard';
-import { useEffect, useState } from 'preact/hooks';
+import { userContext } from "../../contexts/userContext";
+import style from './style.css';
 
 const Home = () => {
 	const userInfo = useContext(userContext);
@@ -43,24 +41,6 @@ const Home = () => {
 				})
 		}
 	}, [userInfo])
-
-	// HACK i don't know how to use position: sticky apparently
-	const [sideSticky, setSideSticky] = useState(false);
-
-	// useEffect(() => {
-	//  const handleScroll = () => {
-	//      if (window.scrollY > 3.5 * parseFloat(getComputedStyle(document.documentElement).fontSize)) {
-	//          setSideSticky(window.scrollY - 3.5 * parseFloat(getComputedStyle(document.documentElement).fontSize));
-	//      } else {
-	//          setSideSticky(0);
-	//      }
-	//  }
-	//  window.addEventListener("scroll", handleScroll);
-	//  return () => {
-	//      window.removeEventListener("scroll", handleScroll);
-	//  }
-	// }, [])
-
 
 	// prevent rendering if user is not logged in
 	if (userInfo && Object.keys(userInfo).length === 0) { return <NotLoggedIn /> }
@@ -131,7 +111,7 @@ const Projects = props => {
 				backgroundColor: "#464646",
 				border: "none"
 			}}>
-				<CardContent>
+				<CardContent component={CardActionArea}>
 					<Box>
 						<strong class={style.sidebarTitle}>{props.name}</strong>
 					</Box>

@@ -1,4 +1,4 @@
-import { Box, Card, CardContent } from '@mui/material';
+import { Box, Card, CardContent, CardActionArea } from '@mui/material';
 import { GradeColor } from '../../components/GradeColor/GradeColor';
 import style from './style.css';
 
@@ -14,7 +14,7 @@ export const SidebarCard = props => {
                 textDecoration: "none",
                 width: "90%",
             }}>
-                <CardContent>
+                <CardContent component={CardActionArea}>
                     <Box sx={{
                         display: "flex",
                         justifyContent: "space-between",
