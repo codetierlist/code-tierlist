@@ -5,7 +5,7 @@ import style from './style.css';
 export const SidebarCard = props => {
     return (
         <a href={
-            `/project/${props.name.replaceAll(" ", "-").toLowerCase()}`
+            `/assignments/${props.name.replaceAll(" ", "-")}`
         } class={style.noUnderline}>
             <Card sx={{
                 backgroundColor: "#464646",

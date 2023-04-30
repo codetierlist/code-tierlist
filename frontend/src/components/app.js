@@ -11,7 +11,7 @@ import { useState, useEffect } from 'preact/hooks';
 import Home from '../routes/home';
 import Create from '../routes/create';
 import Profile from '../routes/profile';
-import Project from '../routes/project';
+import Assignment from '../routes/assignment';
 import SubmitCode from '../routes/submitCode';
 import SubmitTest from '../routes/submitTest';
 import TestNewCode from '../routes/testNewCode';
@@ -61,7 +61,7 @@ const App = () => {
 							<Login path="/register" />
 							<RouteGuard path="/create" component={Create} />
 							<RouteGuard path="/profile" component={Profile} />
-							<RouteGuard path="/assignments/:id" component={Project} />
+							<RouteGuard path="/assignments/:id" component={Assignment} />
 							<RouteGuard path="/submit-code/:id" component={SubmitCode} />
 							<RouteGuard path="/submit-test/:id" component={SubmitTest} />
 							<RouteGuard path="/test-new-code/:id" component={TestNewCode} />

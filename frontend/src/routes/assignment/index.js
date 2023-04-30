@@ -5,7 +5,7 @@ import { userContext } from "../../contexts/userContext";
 import { useEffect, useState, useContext } from "preact/hooks";
 import useAuthApi from "../../hooks/useApi";
 
-const Project = (props) => {
+const Assignment = (props) => {
     const [loading, data, error] = useAuthApi(`/assignments/${props.id}`, { method: "GET" });
 
     if (loading) {
@@ -124,4 +124,4 @@ const ExistingProject = props => (
     </>
 );
 
-export default Project;
+export default Assignment;

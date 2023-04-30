@@ -28,7 +28,7 @@ async function PublishAssignment(name, description, solution) {
 }
 
 const Create = () => {
-    const user = useContext(userContext);
+    const [user] = useContext(userContext);
     const [loading, setLoading] = useState(false);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -42,10 +42,10 @@ const Create = () => {
             margin: "auto",
         }}>
             <Typography sx={{ margin: "3rem 1rem 1rem 1rem" }} variant="h2">
-                Create a new project
+                Create a new assignment
             </Typography>
             <Typography sx={{ margin: "1rem" }}>
-                To create a new project for students to use, provide the name of the project, a description, and the solutions to the tests. The solutions will be used to verify student tests and grade them accordingly. The solutions will never be shown to students and will only be used to verify their tests.
+                To create a new assignment for students to use, provide the name of the assignment, a description, and the solutions to the tests. The solutions will be used to verify student tests and grade them accordingly. The solutions will never be shown to students and will only be used to verify their tests.
             </Typography>
             <Box sx={{
                 display: "flex",
@@ -55,13 +55,13 @@ const Create = () => {
             }}>
                 <TextField
                     sx={{ margin: "1rem" }}
-                    label="Project Name"
+                    label="Assignment Name"
                     variant="outlined"
                     onChange={(e) => setName(e.target.value)}
                 />
                 <TextField
                     sx={{ margin: "1rem" }}
-                    label="Project Description"
+                    label="Assignment Description"
                     variant="outlined"
                     onChange={(e) => setDescription(e.target.value)}
                 />
@@ -101,7 +101,7 @@ const Create = () => {
 				            marginRight: "0.5em"
 				        }} />
 				    }
-                    Submit new project
+                    Submit new assignment
                 </Button>
             </Box>
         </Box>

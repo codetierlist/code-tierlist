@@ -35,9 +35,14 @@ export class AssignmentController {
   async getAssignments(): Promise<AssignmentInfo[]> {
     return [
       {
-        name: 'CSC148-A1',
-        description: 'Introduction to suffering',
-        numTests: 2,
+        name: "CSC148 A2",
+        numTests: 150,
+        description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
+      },
+      {
+        name: "CSC236 A1",
+        numTests: 51,
+        description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
       },
     ];
   }

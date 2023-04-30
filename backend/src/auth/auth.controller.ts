@@ -59,22 +59,10 @@ export class AuthController {
       myProjects: [
 				{
 					name: "CSC148 A2",
-					numTest: 150,
+					numTests: 150,
 					grade: "S",
 					description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
 				},
-				{
-					name: "CSC236 A1",
-					numTest: 51,
-					grade: "C",
-					description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-				},
-				{
-					name: "CSC209 A4",
-					numTest: 20,
-					grade: "B",
-					description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-				}
 			]
     };
   }
