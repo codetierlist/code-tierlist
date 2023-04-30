@@ -52,12 +52,10 @@ export default function TestNewCode({ id }) {
 	};
 
 	const handleNext = () => {
-		if (activeStep >= 1) {
-			setLoading(true);
-		}
-
 		switch (activeStep) {
 			case 0: // Submit working test
+				setLoading(true);
+
 				postCodeToAPI({url: "test", id, code: steps[0].content.props.code})
 					.then((res) => {
 						console.log(res);
@@ -67,11 +65,14 @@ export default function TestNewCode({ id }) {
 					})
 					.catch((err) => {
 						console.log(err);
+						// HACK: when API is down, continue anyway!
+						setNewActiveStep();
 						setLoading(false);
-						alert(err);
 					});
 				break;
 			case 1: // Submit code
+				setLoading(true);
+
 				postCodeToAPI({url: "code", id, code: steps[1].content.props.code})
 					.then((res) => {
 						console.log(res);
@@ -81,9 +82,14 @@ export default function TestNewCode({ id }) {
 					})
 					.catch((err) => {
 						console.log(err);
+						// HACK: when API is down, continue anyway!
+						setNewActiveStep();
 						setLoading(false);
-						alert(err);
 					});
+				break;
+			case 2: // View tier list
+				// go home
+				window.location.href = "/";
 				break;
 		}
 	};
