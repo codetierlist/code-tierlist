@@ -48,6 +48,11 @@
 	}
 }
 
+.header nav {
+	align-items: center;
+	display: flex;
+}
+
 .header nav a.active {
 	background: rgba(0, 0, 0, 0.4);
 }

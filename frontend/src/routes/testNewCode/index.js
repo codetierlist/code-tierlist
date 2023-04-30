@@ -1,54 +1,91 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepButton from '@mui/material/StepButton';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { useState } from 'preact/hooks';
+import { postCodeToAPI } from '../../utils/PostCodeToAPI';
+import {
+	Progress,
+	Box,
+	Step,
+	Stepper,
+	StepLabel,
+	Typography,
+	Button,
+	Container,
+	LinearProgress,
+	StepButton,
+	CircularProgress,
+} from '@mui/material';
 
 import SubmitCode from '../submitCode';
 import SubmitTest from '../submitTest';
 import TierList from '../tierlist';
 
-const steps = [
-	{
-		name: "Submit working test",
-		content: <SubmitTest noButton />,
-		buttonText: "Validate test"
-	},
-	{
-		name: "Submit your code",
-		content: <SubmitCode noButton />,
-		buttonText: "Submit code"
-	},
-	{
-		name: "View tier list!",
-		content: <TierList />,
-		buttonText: "Finish"
-	}
-];
+export default function TestNewCode({ id }) {
+	const steps = [
+		{
+			name: "Submit working test",
+			content: <SubmitTest noButton id={id} />,
+			buttonText: "Validate test"
+		},
+		{
+			name: "Submit your code",
+			content: <SubmitCode noButton id={id} />,
+			buttonText: "Submit code"
+		},
+		{
+			name: "View tier list!",
+			content: <TierList id={id} />,
+			buttonText: "Finish"
+		}
+	];
 
-export default function TestNewCode() {
-	const [activeStep, setActiveStep] = React.useState(0);
-	const [completed, setCompleted] = React.useState({});
+	const [activeStep, setActiveStep] = useState(0);
+	const [loading, setLoading] = useState(false);
+	const [completed, setCompleted] = useState({});
 
-	const totalSteps = () => {
-		return steps.length;
-	};
+	const totalSteps = () => { return steps.length; };
 
-	const completedSteps = () => {
-		return Object.keys(completed).length;
-	};
+	const completedSteps = () => { return Object.keys(completed).length; };
 
-	const isLastStep = () => {
-		return activeStep === totalSteps() - 1;
-	};
+	const isLastStep = () => { return activeStep === totalSteps() - 1; };
 
 	const allStepsCompleted = () => {
 		return completedSteps() === totalSteps();
 	};
 
 	const handleNext = () => {
+		if (activeStep >= 1) {
+			setLoading(true);
+		}
+
+		switch (activeStep) {
+			case 0: // Submit working test
+				postCodeToAPI({url: "test", id, code: steps[0].content.props.code})
+					.then((res) => {
+						console.log(res);
+						setCompleted({ ...completed, 0: true });
+						setLoading(false);
+						handleNext();
+					})
+					.catch((err) => {
+						console.log(err);
+						setLoading(false);
+					}
+					);
+				break;
+			case 1: // Submit code
+				postCodeToAPI({url: "code", id, code: steps[1].content.props.code})
+					.then((res) => {
+						console.log(res);
+						setCompleted({ ...completed, 1: true });
+						setLoading(false);
+						handleNext();
+					})
+					.catch((err) => {
+						console.log(err);
+						setLoading(false);
+					});
+				break;
+		}
+
 		const newActiveStep =
 			isLastStep() && !allStepsCompleted()
 				? // It's the last step, but not all steps have been completed,
@@ -64,13 +101,6 @@ export default function TestNewCode() {
 
 	const handleStep = (step) => () => {
 		setActiveStep(step);
-	};
-
-	const handleComplete = () => {
-		const newCompleted = completed;
-		newCompleted[activeStep] = true;
-		setCompleted(newCompleted);
-		handleNext();
 	};
 
 	const handleReset = () => {
@@ -106,7 +136,7 @@ export default function TestNewCode() {
 						<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 							<Button
 								color="inherit"
-								disabled={activeStep === 0}
+								disabled={activeStep === 0 || loading}
 								onClick={handleBack}
 								sx={{ mr: 1 }}
 							>
@@ -117,8 +147,14 @@ export default function TestNewCode() {
 								onClick={handleNext}
 								sx={{ mr: 1 }}
 								variant="contained"
+								disabled={loading}
 								color="success"
 							>
+								{
+									loading && <CircularProgress size={16} sx={{
+										marginRight: "0.5em"
+									}}/>
+								}
 								{steps[activeStep].buttonText}
 							</Button>
 						</Box>
