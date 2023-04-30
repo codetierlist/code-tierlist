@@ -10,41 +10,43 @@ const Hardcode = [
     {
         tier: "S",
         people: [
-            "John Doe",
-            "Jane Doe",
-            "John Smith",
+            "Clara",
+            "Haruno Sora",
+            "Kobayashi Matcha",
         ]
     },
     {
         tier: "A",
         people: [
-            "John Doe",
-            "Jane Doe",
-            "John Smith",
+            "Yuezheng Ling",
+            "Vocaloid Matryoshka Names",
+            "Nekomura Iroha",
+            "Yuezheng Longya",
+            "Kobayashi Matcha",
+            "Kizuna Akari",
         ]
     },
     {
         tier: "B",
         people: [
-            "John Doe",
-            "Jane Doe",
-            "John Smith",
+            "Megurine Luka",
+            "Yuzuki Yukari",
+            "Utatane Piko",
+            "You"
         ]
     },
     {
         tier: "C",
         people: [
-            "John Doe",
-            "Jane Doe",
-            "John Smith",
+            "Tone Rion",
+            "Sweet Ann",
         ]
     },
     {
         tier: "F",
         people: [
-            "John Doe",
-            "Jane Doe",
-            "John Smith",
+            "Sf-A2 Miki",
+            "Masaoka Azuki",
         ]
     },
 ]
@@ -105,6 +107,7 @@ const TierList = () => {
                                         <InitialsAvatar
                                             name={person}
                                             key={index}
+                                            className={ person === "You" ? style.you : "" }
                                             sx={{
                                                 margin: "2em 1em",
                                             }}

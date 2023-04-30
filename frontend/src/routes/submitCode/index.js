@@ -12,10 +12,10 @@ const SubmitTest = ({buttonName = "Submit", doOnClick = null, noButton = false, 
             maxWidth: "1020px",
             margin: "auto",
         }}>
-            <Typography sx={{ margin: "3rem 1rem 1rem 1rem" }} variant="h2">
+            <Typography sx={{ margin: "3rem 0 1rem 0" }} variant="h2">
                 Submit your code {id}
             </Typography>
-            <Typography sx={{ margin: "1rem" }}>
+            <Typography sx={{ margin: "1rem 0" }}>
                 Please enter the code that you want to run against our test cases.
             </Typography>
             <Editor
