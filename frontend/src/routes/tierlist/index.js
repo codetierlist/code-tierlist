@@ -57,17 +57,18 @@ const Hardcode = [
 
 function GetLetterGrade(solved, total) {
     const percent = solved / total;
+    let grade = "F";
 
     if (percent >= 0.9) {
-        return "S";
+        grade = "S";
     } else if (percent >= 0.8) {
-        return "A";
+        grade = "A";
     } else if (percent >= 0.7) {
-        return "B";
+        grade = "B";
     } else if (percent >= 0.6) {
-        return "C";
+        grade = "C";
     }
-    return "F";
+    return grade;
 }
 
 const TierList = () => {
