@@ -77,6 +77,7 @@ export const GoogleTheme = createTheme({
         MuiCard: {
             styleOverrides: {
                 root: {
+                    background: mode === THEME.LIGHT ? "#fff" : "#222222 !important",
                     width: "100%",
                     margin: "1em 0",
                     borderRadius: "1em",

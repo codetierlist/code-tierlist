@@ -5,26 +5,31 @@ import { userContext } from "../../contexts/userContext";
 import { useEffect, useState, useContext } from "preact/hooks";
 
 const Project = ({id}) => {
-    const [projectData, setProjectData] = useState({});
+    // HACK
+    const [projectData, setProjectData] = useState({
+        name: "CSC148 A2",
+        numTest: 150,
+        description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
+    });
 
     useEffect(() => {
         // if 404, setProjectData to default
-        fetch(`http://api.codetierlist.tech/assignments/${id}`, {
+        fetch(`http://api.codetierlist.tech/assignments`, {
             method: "GET"
         })
             .then((res) => res.json())
             .then((data) => {
-                setProjectData(data);
+                data.forEach((assignment) => {
+                    if (assignment["name"].toLowerCase().replaceAll(" ", "-") === id.toLowerCase()) {
+                        setProjectData(assignment);
+                    }
+                })
             })
             .catch((err) => {
-                setProjectData({
-                    name: "CSC148 A2",
-                    numTest: 150,
-                    description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-                });
                 console.log(err);
             })
-    }, [id])
+            console.log(projectData);
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <Box component="section" sx={{
@@ -32,15 +37,15 @@ const Project = ({id}) => {
             margin: "auto",
         }}>
             <HeroCard
-                sidebarTitle={projectData.title}
-                numTest={projectData.numTest}
-                name={projectData.title}
+                sidebarTitle={projectData["name"] ? projectData["name"] : "Loading" }
+                numTests={projectData["numTests"] ? projectData["numTests"] : "Loading" }
+                name={projectData["name"] ? projectData["name"] : "Loading" }
             />
             <Typography sx={{ margin: "3rem 1rem 1rem 1rem" }} variant="h2">
                 Description
             </Typography>
             <Typography sx={{ margin: "1rem" }}>
-                {projectData.description}
+                {projectData["description"]}
             </Typography>
         </Box>
     )
@@ -64,7 +69,7 @@ const HeroCard = props => {
 				}}>
 					<Box>
 						<Typography variant="h2" gutterBottom>{props.name}</Typography>
-						{props.numTest} tests
+						{props.numTests} tests
 					</Box>
                     <Box>
                         {

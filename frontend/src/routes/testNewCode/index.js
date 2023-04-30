@@ -1,33 +1,36 @@
+import {
+	Box,
+	Button,
+	CircularProgress,
+	Step,
+	StepButton,
+	Stepper,
+	Typography
+} from '@mui/material';
 import { useState } from 'preact/hooks';
 import { postCodeToAPI } from '../../utils/PostCodeToAPI';
-import {
-	Progress,
-	Box,
-	Step,
-	Stepper,
-	StepLabel,
-	Typography,
-	Button,
-	Container,
-	LinearProgress,
-	StepButton,
-	CircularProgress,
-} from '@mui/material';
 
-import SubmitCode from '../submitCode';
-import SubmitTest from '../submitTest';
+import SubmitCodeRaw from '../submitCode/submitCodeRaw';
+import SubmitTestRaw from '../submitTest/submitTestRaw';
+
 import TierList from '../tierlist';
 
 export default function TestNewCode({ id }) {
+	const [activeStep, setActiveStep] = useState(0);
+	const [loading, setLoading] = useState(false);
+	const [completed, setCompleted] = useState({});
+	const [code, setCode] = useState("");
+	const [test, setTest] = useState("");
+
 	const steps = [
 		{
 			name: "Submit working test",
-			content: <SubmitTest noButton id={id} doOnClick={handleNext} />,
+			content: <SubmitTestRaw setCode={setTest} id={id} />,
 			buttonText: "Validate test"
 		},
 		{
 			name: "Submit your code",
-			content: <SubmitCode noButton id={id} doOnClick={handleNext} />,
+			content: <SubmitCodeRaw setCode={setCode} id={id} />,
 			buttonText: "Submit code"
 		},
 		{
@@ -37,9 +40,6 @@ export default function TestNewCode({ id }) {
 		}
 	];
 
-	const [activeStep, setActiveStep] = useState(0);
-	const [loading, setLoading] = useState(false);
-	const [completed, setCompleted] = useState({});
 
 	const totalSteps = () => { return steps.length; };
 
@@ -56,7 +56,7 @@ export default function TestNewCode({ id }) {
 			case 0: // Submit working test
 				setLoading(true);
 
-				postCodeToAPI({url: "test", id, code: steps[0].content.props.code})
+				postCodeToAPI({id, code: test})
 					.then((res) => {
 						console.log(res);
 						setCompleted({ ...completed, 0: true });
@@ -73,7 +73,7 @@ export default function TestNewCode({ id }) {
 			case 1: // Submit code
 				setLoading(true);
 
-				postCodeToAPI({url: "code", id, code: steps[1].content.props.code})
+				postCodeToAPI({url: "code", id, code})
 					.then((res) => {
 						console.log(res);
 						setCompleted({ ...completed, 1: true });
@@ -118,7 +118,7 @@ export default function TestNewCode({ id }) {
 	};
 
 	return (
-		<Box sx={{ maxWidth: '90%', margin: "2em auto 0 auto" }}>
+		<Box sx={{ maxWidth: '90%', margin: "2em auto" }}>
 			<Stepper nonLinear activeStep={activeStep}>
 				{steps.map((step, index) => (
 					<Step key={step} completed={completed[index]}>
