@@ -37,7 +37,7 @@ const Login = () => {
                                 justifyContent: "space-between",
                                 marginTop: "1rem",
                             }}>
-                            <Button variant="contained" href="/auth/github" color="gray">
+                            <Button variant="contained" href="../" color="gray">
                                 <GitHub sx={{ marginRight: "0.5rem" }} />
                                 Login with GitHub
                             </Button>
