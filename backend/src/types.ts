@@ -13,7 +13,7 @@ export interface User {
 
 export interface Assignment {
   name: string;
-  description: string;
+  description?: string;
   solution: string;
 }
 

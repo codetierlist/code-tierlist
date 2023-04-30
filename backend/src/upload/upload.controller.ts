@@ -1,5 +1,4 @@
-import { Body, Controller, Param, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
-import { FilesInterceptor } from '@nestjs/platform-express';
+import { Body, Controller, Param, Post } from '@nestjs/common';
 import { TestCase } from 'src/types';
 import { UploadService } from './upload.service';
 
@@ -16,21 +15,28 @@ export class UploadController {
   ) {}
 
   @Post('tests/:assignmentId')
-  @UseInterceptors(FilesInterceptor('files'))
+  /**
+   * Add a test to the assignment.
+   * @Param body The test to add.
+   * @returns The created test.
+   */
   async addTest(
     @Param('assignmentId') assignmentId: string,
-    @UploadedFiles() files: Express.Multer.File[],
+    @Body() body: { testInput: string },
   ): Promise<TestCase> {
-    const allTests = this.uploadService.getContentFromAllFiles(files);
     await this.uploadService.runTestAgainstSolution();
     return this.uploadService.createTestCase();
   }
 
   @Post('code/:assignmentId')
-  @UseInterceptors(FilesInterceptor('files'))
+  /**
+   * Test the code against the solution.
+   * @Param body The code to test.
+   * @returns The results of the test for everyone
+   */
   async testCode(
     @Param('assignmentId') assignmentId: string,
-    @UploadedFiles() files: Express.Multer.File[],
+    @Body() body: { submission: string },
   ): Promise<Result[]> {
     return [
       {

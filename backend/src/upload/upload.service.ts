@@ -5,10 +5,6 @@ import { TestCase } from 'src/types';
 export class UploadService {
   constructor() {}
 
-  getContentFromAllFiles(files: Express.Multer.File[]): string {
-    return files.reduce((acc, file) => acc + file.buffer.toString(), '');
-  }
-
   async runTestAgainstSolution() {}
 
   async createTestCase(): Promise<TestCase> {
