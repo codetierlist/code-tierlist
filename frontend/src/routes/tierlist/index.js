@@ -73,6 +73,12 @@ const TierList = () => {
             marginTop: "0",
             padding: "2em",
         }}>
+            <Typography sx={{ margin: "1rem 0 0 0" }} variant="h2">
+                Tier list!
+            </Typography>
+            <Typography sx={{ margin: "1rem 0 2rem 0" }}>
+                See how you compare to other people!
+            </Typography>
             <Grid container spacing={2} sx={{
                 background: "black",
                 padding: "2em"
