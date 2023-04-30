@@ -1,3 +1,5 @@
+import sleep from "sleep-promise";
+
 /**
  * Sends a POST request to the API with the code and id.
  * @param {string} code The code to send to the API.
@@ -14,7 +16,7 @@ export const postCodeToAPI = async ({code, id = "bruh", url = "tests"}) => {
             "Content-Type": "text/plain"
         },
         body: code
-    });
+    }).then(sleep(1000));
 
     console.log("====");
     console.log(response);
