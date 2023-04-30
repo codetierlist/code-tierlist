@@ -1,5 +1,6 @@
 import { Button, Grid, Card, CardContent } from "@mui/material";
 import style from './style.css';
+import { Link } from "preact-router";
 
 /**
  * This is the landing page that is shown when the user is not logged in.
@@ -13,8 +14,12 @@ export const NotLoggedIn = () => {
                     <div class={style.heroContent}>
                         <h1 class={style.header}>Code Tierlist</h1>
                         <h2 class={style.subtitle}>The leading place to test your code</h2>
-                        <Button variant="contained" color="success" sx={{ marginRight: "1.5em" }}>Sign up</Button>
-                        <Button color="green">Sign in</Button>
+                        <Link href="/register">
+                            <Button variant="contained" color="success" sx={{ marginRight: "1.5em" }}>Sign up</Button>
+                        </Link>
+                        <Link href="/login">
+                            <Button color="green">Sign in</Button>
+                        </Link>
                     </div>
                 </div>
             </section>

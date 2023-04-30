@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import style from './style.css';
 import { NotLoggedIn } from '../../components/NotLoggedIn/NotLoggedIn';
 import { userContext } from "../../contexts/userContext";
@@ -6,43 +5,24 @@ import { useContext } from 'preact/hooks';
 import { Grid, Box, Card, CardContent, Typography } from '@mui/material';
 import { SidebarCard } from '../../components/SidebarCard/SidebarCard';
 import { useEffect, useState } from 'preact/hooks';
+import useAuthApi from '../../hooks/useApi';
 
 const Home = () => {
-	const userInfo = useContext(userContext);
-	const [allAssignments, setAllAssignments] = useState([]);
+	const [userInfo] = useContext(userContext);
 
-	useEffect(() => {
-		if (userInfo && Object.keys(userInfo).length !== 0) {
-			fetch("http://api.codetierlist.tech/assignments", {
-				method: "GET"
-			})
-				.then((res) => res.json())
-				.then((data) => {
-					setAllAssignments(data);
-				})
-				.catch((err) => {
-					const errorData = [
-						{
-							name: "CSC148 A2",
-							numTest: 150,
-							description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-						},
-						{
-							name: "CSC236 A1",
-							numTest: 51,
-							description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-						},
-						{
-							name: "CSC209 A4",
-							numTest: 20,
-							description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-						}
-					];
-					setAllAssignments(errorData);
-					console.log(err);
-				})
-		}
-	}, [userInfo])
+	const [loading, data, error] = useAuthApi('/assignments', { method: 'get' });
+
+	if (loading) {
+		return <div>Loading...</div>
+	}
+
+	if (error) {
+		console.log(error);
+	}
+
+	if (data) {
+		console.log(data);
+	}
 
 	// HACK i don't know how to use position: sticky apparently
 	const [sideSticky, setSideSticky] = useState(false);
@@ -61,9 +41,8 @@ const Home = () => {
 		}
 	}, [])
 
-
 	// prevent rendering if user is not logged in
-	if (userInfo && Object.keys(userInfo).length === 0) { return <NotLoggedIn /> }
+	if (!userInfo || Object.keys(userInfo).length === 0) { return <NotLoggedIn /> }
 
 	return (
 		<Grid class={style.home} container spacing={2} sx={{
@@ -105,7 +84,7 @@ const Home = () => {
 					All projects
 				</Typography>
 				{
-					allAssignments.map((i) => {
+					data.map((i) => {
 						return (
 							<Projects name={i.name} numTest={i.numTest} grade={i.grade} key={i} description={i.description} />
 						)

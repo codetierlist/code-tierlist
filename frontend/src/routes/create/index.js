@@ -5,7 +5,7 @@ import { useContext } from "preact/hooks";
 import Editor from '@monaco-editor/react';
 
 const Create = () => {
-    const user = useContext(userContext);
+    const [user] = useContext(userContext);
 
     if (user && user["role"] !== "instructor") { return <Typography>You are not a instructor</Typography> }
 

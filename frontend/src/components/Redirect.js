@@ -1,9 +1,9 @@
 import { route } from 'preact-router';
 import { useEffect } from 'preact/hooks';
 
-export const Redirect = () => {
+export const Redirect = (props) => {
   useEffect(() => {
-    route(this.props.to, true);
+    route(props.to, true);
   }, []);
 
   return null;

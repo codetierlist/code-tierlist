@@ -1,4 +1,4 @@
-import { Request, Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Request, Body, Controller, Get, Post, UseGuards, Param } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Roles } from 'src/auth/roles.decorator';
@@ -40,5 +40,22 @@ export class AssignmentController {
         numTests: 2,
       },
     ];
+  }
+
+  /**
+   * Get a specific assignment.
+   * @Param assignmentId The assignment to get.
+   * @returns The assignment.
+   * @throws 404 if the assignment does not exist.
+   */
+  @Get(':assignmentId')
+  async getAssignment(
+    @Param('assignmentId') assignmentId: string,
+  ): Promise<AssignmentInfo> {
+    return {
+      name: assignmentId,
+      description: 'Introduction to suffering',
+      numTests: 2,
+    };
   }
 }

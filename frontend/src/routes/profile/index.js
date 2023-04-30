@@ -3,7 +3,7 @@ import { userContext } from '../../contexts/userContext';
 
 // Note: `user` comes from the URL, courtesy of our router
 const Profile = () => {
-	const userInfo = useContext(userContext);
+	const [userInfo] = useContext(userContext);
 
 	return (
 		<div>

@@ -42,15 +42,13 @@ export class AuthService {
 
   async createUser(
     data: CreateUserDto
-  ): Promise<Omit<User, "password" | "refresh_tokens" | "id">> {
+  ): Promise<User> {
     const hashedPassword = await bcrypt.hash(data.password, 10);
     /* eslint-disable */
-    const { password, id, ...rest } =
-      await this.userService.createUser({
+    return this.userService.createUser({
         ...data,
         password: hashedPassword,
       });
-    return rest;
   }
 
   async createPayload(user: User): Promise<IPayload> {
