@@ -55,6 +55,21 @@ const Hardcode = [
     },
 ]
 
+function GetLetterGrade(solved, total) {
+    const percent = solved / total;
+
+    if (percent >= 0.9) {
+        return "S";
+    } else if (percent >= 0.8) {
+        return "A";
+    } else if (percent >= 0.7) {
+        return "B";
+    } else if (percent >= 0.6) {
+        return "C";
+    }
+    return "F";
+}
+
 const TierList = () => {
     return (
         <Box component="section" sx={{
@@ -70,7 +85,7 @@ const TierList = () => {
             {
                 Hardcode.map((tier, index) => {return (
                     <Fragment key={index}>
-                        <Grid item xs={3} key={index} sx={{
+                        <Grid item xs={3} sx={{
                             backgroundColor: GetGradeColor(tier.tier).main,
                             borderBottom: "1px solid #2e2e2e",
                             textAlign: "center",
@@ -85,7 +100,7 @@ const TierList = () => {
                                 {tier.tier}
                             </Typography>
                         </Grid>
-                        <Grid item xs={9} key={index} sx={{
+                        <Grid item xs={9} sx={{
                             backgroundColor: "#1e1e1e",
                             borderBottom: "1px solid #2e2e2e",
                         }}>
