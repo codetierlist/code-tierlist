@@ -4,7 +4,6 @@ import { NotLoggedIn } from '../../components/NotLoggedIn/NotLoggedIn';
 import { SidebarCard } from '../../components/SidebarCard/SidebarCard';
 import useAuthApi from '../../hooks/useApi';
 import { userContext } from "../../contexts/userContext";
-import useAuthApi from '../../hooks/useApi';
 import style from './style.css';
 
 const Home = () => {
