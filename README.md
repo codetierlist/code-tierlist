@@ -22,7 +22,7 @@ Follow along below to **learn more**:
 
 - [Project homepage](https://codetierlist.tech/)
 <picture>
-  <img alt="Code Tier List" src="./frontend/src/assets/favicon.svg" height="10"> 
+  <img alt="Code Tier List" src="./frontend/src/assets/favicon.svg" height="10" style="display:inline;"> 
 </picture>
 
 ## Features
@@ -45,12 +45,12 @@ While students do provide their test cases and code to rank their progress, thes
 ### Tech stack:
 * Frontend
     * Material UI <picture>
-  <img alt="Material UI" src="./frontend/src/assets/material-ui-logo.svg" height="13"> 
+  <img alt="Material UI" src="./frontend/src/assets/material-ui-logo.svg" height="13" style="display:inline;"> 
 </picture>
-    * Preact <img alt="Preact" src="./frontend/src/assets/preact-logo.svg" height="13"> 
+    * Preact <img alt="Preact" src="./frontend/src/assets/preact-logo.svg" height="13" style="display:inline;"> 
 * Backend
-    * NestJS <img alt="NextJS" src="./frontend/src/assets/next-js-logo.png" height="13"> 
-    * Docker <img alt="Docker" src="./frontend/src/assets/docker-logo.png" height="13"> 
+    * NestJS <img alt="NextJS" src="./frontend/src/assets/next-js-logo.png" height="13" style="display:inline;"> 
+    * Docker <img alt="Docker" src="./frontend/src/assets/docker-logo.png" height="13" style="display:inline;"> 
 
 ### Requirements:
 Contact [support](mailto:support@codetierlist.tech) <img alt="Wrench" src="./frontend/src/assets/wrench-icon.png" height="13"> for system requirements and setup. The software is currently under heavy development and thus requirements are not set in stone.
@@ -62,4 +62,4 @@ Code Tier List is **free and open-source software** licensed under the **MIT Lic
 You can open issues for bugs you've found or features you think are missing. You can also submit pull requests to this repository.
 
 ## License
-MIT License <img alt="MIT" src="./frontend/src/assets/MIT-logo.png" height="13"> 
+MIT License <img alt="MIT" src="./frontend/src/assets/MIT-logo.png" height="13" style="display:inline;"> 
