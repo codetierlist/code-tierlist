@@ -3,7 +3,6 @@ import { Box, Card, CardContent, CardActionArea, Typography } from '@mui/materia
 import { useContext, useEffect, useState } from 'preact/hooks';
 import { NotLoggedIn } from '../../components/NotLoggedIn/NotLoggedIn';
 import { SidebarCard } from '../../components/SidebarCard/SidebarCard';
-import { useEffect, useState } from 'preact/hooks';
 import useAuthApi from '../../hooks/useApi';
 import { userContext } from "../../contexts/userContext";
 
@@ -64,7 +63,7 @@ const Home = () => {
 						sx={{
 							margin: "1rem"
 						}}
-					>Your projects</Typography>
+					>Your assignments</Typography>
 					{
 						userInfo["myProjects"].map((i) => {
 							return (
@@ -85,7 +84,7 @@ const Home = () => {
 						margin: "1rem"
 					}}
 				>
-					All projects
+					All assignments
 				</Typography>
 				{
 					data.map((i) => {
@@ -102,7 +101,7 @@ const Home = () => {
 const Projects = props => {
 	return (
 		<a href={
-            `/project/${props.name.replaceAll(" ", "-").toLowerCase()}`
+            `/assignments/${props.name.replaceAll(" ", "-")}`
         } class={style.noUnderline}>
 			<Card sx={{
 				margin: "1em",

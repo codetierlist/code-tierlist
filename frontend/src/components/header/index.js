@@ -18,8 +18,8 @@ const Header = ({ logout }) => {
 				<>
 					{
 						userInfo['role'] === 'instructor' &&
-						<Link activeClassName={style.active} href="/new-project">
-							+ New Project
+						<Link activeClassName={style.active} href="/create">
+							+ New Assignment
 						</Link>
 					}
 					<div
@@ -30,7 +30,7 @@ const Header = ({ logout }) => {
 					>
 						<Logout fontSize="small" />
 					</div>
-					<Link activeClassName={style.active} href="profile">
+					<Link activeClassName={style.active} href="/profile">
 						<InitialsAvatar name='guest' />
 					</Link>
 				</>
