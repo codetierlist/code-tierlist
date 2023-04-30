@@ -2,30 +2,45 @@ import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 
 import { userContext } from "../../contexts/userContext";
 
-import { useContext } from "preact/hooks";
+import { useEffect, useState, useContext } from "preact/hooks";
 
-const ProjectData = {
-    title: "Project Title",
-    description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
-    numTest: 150
-}
+const Project = ({id}) => {
+    const [projectData, setProjectData] = useState({});
 
-const Project = () => {
+    useEffect(() => {
+        // if 404, setProjectData to default
+        fetch(`http://api.codetierlist.tech/assignments/${id}`, {
+            method: "GET"
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setProjectData(data);
+            })
+            .catch((err) => {
+                setProjectData({
+                    name: "CSC148 A2",
+                    numTest: 150,
+                    description: "This is where the assignment description belongs. We’re no strangers to love you know the rules and so do I Lorem ipsum dolor carrot cake apple pie cider vinegar accessibility",
+                });
+                console.log(err);
+            })
+    }, [id])
+
     return (
         <Box component="section" sx={{
             maxWidth: "1020px",
             margin: "auto",
         }}>
             <HeroCard
-                sidebarTitle={ProjectData.title}
-                numTest={ProjectData.numTest}
-                name={ProjectData.title}
+                sidebarTitle={projectData.title}
+                numTest={projectData.numTest}
+                name={projectData.title}
             />
             <Typography sx={{ margin: "3rem 1rem 1rem 1rem" }} variant="h2">
                 Description
             </Typography>
             <Typography sx={{ margin: "1rem" }}>
-                {ProjectData.description}
+                {projectData.description}
             </Typography>
         </Box>
     )

@@ -33,6 +33,7 @@
     "@monaco-editor/react": "^4.5.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.2",
+    "axios": "^1.4.0",
     "preact": "^10.11.3",
     "preact-render-to-string": "^5.2.6",
     "preact-router": "^3.2.1"
