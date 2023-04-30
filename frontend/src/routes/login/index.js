@@ -6,6 +6,7 @@ import { useState } from "preact/hooks";
 import { setAuthToken } from "../../utils/setAuthToken";
 
 const Login = (props) => {
+    const { path } = props;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -20,7 +21,7 @@ const Login = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const backendUrl = 'http://localhost:3000'; // TODO: fix url
-        axios.post(backendUrl + '/auth' + window.location.pathname, {
+        axios.post(backendUrl + '/auth' + path, {
             email: email,
             password: password
         })
@@ -57,7 +58,7 @@ const Login = (props) => {
                             <form onSubmit={handleSubmit}>
                                 <Typography variant="h2" gutterBottom>
                                     {
-                                        location.pathname === "/register" ? "Register" : "Login"
+                                        path === "/register" ? "Register" : "Login"
                                     }
                                 </Typography>
                                 <Box sx={{
