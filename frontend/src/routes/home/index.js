@@ -76,7 +76,7 @@ const Home = () => {
 					},
 					position: "relative",
 					top: sideSticky,
-					backgroundColor: "#212121",
+					backgroundColor: "#171717",
 					zIndex: 0
 				}}>
 					<Typography
